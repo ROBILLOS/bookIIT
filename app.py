@@ -1,12 +1,37 @@
 from flask import Flask,session, request, flash, url_for, redirect, render_template, abort ,g
+from forms import Registration, LogIn
+
 ##from flask-login import login_user , logout_user , current_user , login_required
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'testfile'
 app.static_folder = 'static'
 
 @app.route("/")
+@app.route("/index", methods=['GET','POST'])
 def main():
     return render_template('index.html')
+
+
+@app.route("/landing")
+def landing():
+    return render_template('landing.html')
+
+@app.route("/login")
+def login():
+	return render_template('login.html')
+
+@app.route("/register", methods=['GET','POST'])
+def register():
+	form = Registration()
+	if form.validate_on_submit():
+		flash(u'Account created for {form.username.data}!', 'success')
+		return redirect(url_for('test'))
+	return render_template('register.html', title='Register', form=form)
+
+# @app.route("/login", methods=['GET', 'POST'])
+# def call_login():
+# 	redirect(url_for('index')+'#modLogin')
 
 ##@app.route('/login', methods=['GET', 'POST'])
 ##  def login():
@@ -24,4 +49,4 @@ def main():
 ##    return redirect(request.args.get('next') or url_for('index'))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

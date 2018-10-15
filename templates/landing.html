@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BookIIT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
+      <div class="container">
+        <a class="navbar-brand" href="landing.html"><img src="{{ url_for('static', filename='images/logo.png') }}" width="150" height="75"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="probootstrap-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
+            <!-- <li class="nav-item"><a href="" class="nav-link"><img src="{{ url_for('static', filename='images/user.png') }}"></a></li> -->
+            <div class="dropdown">
+                <button class="dropbtn"><img src="{{ url_for('static', filename='images/user.png') }}"></button>
+                <div class="dropdown-content">
+                <a href="#">Profile</a>
+                <a href="#">Preferences</a>
+                <a href="/index">Log Out</a>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="probootstrap-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md pl-md-3 pl-0 probootstrap-image-grid">
+            <div class="row">
+              <div class="col-md-6">
+                <a class="probootstrap-img-item" href="#"><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>
+                <div class="texttest">
+                  <p>Manage Events</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <a class="probootstrap-img-item" href=""><div style="background-image: url(../static/images/office.jpg); background-position: center;"></div></a>
+                <div class="texttest">
+                  <p>Manage Venues</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

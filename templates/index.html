@@ -14,14 +14,14 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="{{ url_for('static', filename='images/logo.png') }}" width="150" height="75"></a>
+          <a class="navbar-brand" href="/index"><img src="{{ url_for('static', filename='images/logo.png') }}" width="150" height="75"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
         <div class="collapse navbar-collapse" id="probootstrap-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="/login" class="nav-link"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
+            <li class="nav-item"><a href="/landing" class="nav-link"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
           </ul>
         </div>
       </div>
@@ -35,8 +35,10 @@
             <div class="probootstrap-text">
               <h1 class="probootstrap-heading text-white mb-4"></h1><img src="{{ url_for('static', filename='images/homelogo.png') }}" alt="Home"</a></h1>
                 <p>
-                  <a class="btn btn-primary mr-2 mb-2" data-toggle="modal" data-target="#modLogin">Log In</a>
-				          <a class="btn btn-primary mr-2 mb-2" data-toggle="modal" data-target="#modSignup" >Sign Up</a>
+                  <a href="/login" class="btn btn-primary mr-2 mb-2">Log In</a>
+                  <a href="/register" class="btn btn-primary mr-2 mb-2">Sign Up</a>
+                  <!-- <a class="btn btn-primary mr-2 mb-2" data-toggle="modal" data-target="#modLogin">Log In</a> -->
+				          <!-- <a class="btn btn-primary mr-2 mb-2" data-toggle="modal" data-target="#modSignup" >Sign Up</a> -->
                 </p>
             </div>
           </div>
@@ -46,10 +48,10 @@
 
 
 <!--- LOG IN !--->
-<div id="modLogin" class="modal fade" role="dialog">
+ <div id="modLogin" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
+    <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -75,7 +77,7 @@
 
 
 <!--- SIGN UP !--->
-<div id="modSignup" class="modal fade" role="dialog">
+<!-- <div id="modSignup" class="modal fade" role="dialog"> -->
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -111,7 +113,7 @@
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->
 
 
     <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>

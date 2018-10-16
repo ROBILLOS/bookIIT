@@ -29,6 +29,10 @@ def register():
 		return redirect(url_for('test'))
 	return render_template('register.html', title='Register', form=form)
 
+@app.route("/venue")
+def venue():
+	return render_template('venue.html')
+
 # @app.route("/login", methods=['GET', 'POST'])
 # def call_login():
 # 	redirect(url_for('index')+'#modLogin')

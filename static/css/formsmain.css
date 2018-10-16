@@ -1,7 +1,3 @@
-
-
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -37,6 +33,9 @@
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
+  background-image: url(../images/background.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /*---------------------------------------------*/
@@ -131,6 +130,8 @@ iframe {
 }
 
 
+  
+
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
@@ -167,8 +168,30 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding-top: 100px;
   background-image: url(../images/background.svg);
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+
+.container-login100-2 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  background-image: url(../images/background.svg);
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
 
 }
 
@@ -192,6 +215,7 @@ iframe {
 
 .wrap-login100-2 {
   width: 960px;
+  height: 500px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -203,7 +227,7 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+  padding: 100px 130px 33px 95px;
 }
 
 /*------------------------------------------------------------------
@@ -223,16 +247,28 @@ iframe {
   width: 290px;
 }
 
+.login100-form-2 {
+  width: 350px;
+}
+
+
 .login100-form-title {
   font-family: Poppins-Bold;
   font-size: 24px;
   color: #333333;
   line-height: 1.2;
-  text-align: center;
+  text-align: left;
 
   width: 100%;
   display: block;
   padding-bottom: 54px;
+}
+
+
+.login100-form-waste {
+  width: 100%;
+  display: block;
+  padding-bottom: 83px;
 }
 
 
@@ -347,7 +383,10 @@ iframe {
   width: 100%;
   height: 50px;
   border-radius: 25px;
-  background: #57b846;
+  /*background: #57b846;*/
+  background: #260007;
+  border-color: #0F0003;
+  /*color: #fff; }*/
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -476,59 +515,3 @@ iframe {
   }
 }
 
-/*
-.probootstrap-cover {
-  background-image: url(../images/background.svg);
-  background-position: center center; }
-  .probootstrap-cover .probootstrap-text .probootstrap-heading {
-    font-size: 70px;
-    line-height: 1; }
-  .probootstrap-cover .probootstrap-text .probootstrap-subheading p {
-    color: rgba(255, 255, 255, 0.5); }
-  @media screen and (max-width: 768px) {
-    .probootstrap-cover .btn {
-      width: 100% !important;
-      border: 1px solid red; } }
-
-.probootstrap-navabr-dark {
-  background: rgba(0, 0, 0, 0.2) !important;
-  position: absolute;
-  left: 0;
-  right: 0; }
-  @media screen and (max-width: 960px) {
-    .probootstrap-navabr-dark {
-      background: #000 !important;
-      top: 0;
-      position: relative; } }
-  .probootstrap-navabr-dark .navbar-nav > .nav-item > .nav-link {
-    padding-top: 5px; /*FOUND IT*/
-    padding-bottom: 5px;
-    padding-left: 20px;
-    padding-right: 20px; }
-    @media screen and (max-width: 960px) {
-      .probootstrap-navabr-dark .navbar-nav > .nav-item > .nav-link {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 0px;
-        padding-right: 0px; } }
-  .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-cta a {
-    color: #fff; }
-  .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-seperator {
-    position: relative;
-    margin-left: 20px;
-    padding-left: 20px; }
-    @media screen and (max-width: 960px) {
-      .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-seperator {
-        padding-left: 0;
-        margin-left: 0; } }
-    .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-seperator:before {
-      position: absolute;
-      content: "";
-      top: 10px;
-      bottom: 10px;
-      left: 0;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.05); }
-      @media screen and (max-width: 960px) {
-        .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-seperator:before {
-          display: none; } }*/

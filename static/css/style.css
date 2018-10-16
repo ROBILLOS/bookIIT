@@ -5,6 +5,7 @@ body {
   background-image: url(../images/background.svg);
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
   font-family: "Raleway", sans-serif;
   line-height: 1.7;
   color: #6f6f6f; }
@@ -105,6 +106,7 @@ h1, h2, h3, h4, h5 {
 
 .probootstrap-cover {
   background-image: url(../images/background.svg);
+  background-size: cover;
   background-position: center center; }
   .probootstrap-cover .probootstrap-text .probootstrap-heading {
     font-size: 70px;

@@ -14,10 +14,5 @@ $(function(){
 				mainNav.removeClass('active');
 			
 			}
-		
-		
-		
-
 	});
-
 });

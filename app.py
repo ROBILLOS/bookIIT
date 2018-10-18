@@ -33,6 +33,9 @@ def register():
 def venue():
 	return render_template('venue.html')
 
+@app.route("/venue/add")
+def venue2():
+	return render_template('addvenue.html')
 # @app.route("/login", methods=['GET', 'POST'])
 # def call_login():
 # 	redirect(url_for('index')+'#modLogin')

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Landing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formsmain.css') }}">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/landing"><img src="{{ url_for('static', filename='images/logo.png') }}" width="150" height="75"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="probootstrap-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
+            <!-- <li class="nav-item"><a href="" class="nav-link"><img src="{{ url_for('static', filename='images/user.png') }}"></a></li> -->
+            <div class="dropdown">
+                <button class="dropbtn"><img src="{{ url_for('static', filename='images/user.png') }}"></button>
+                <div class="dropdown-content">
+                <a href="#">Profile</a>
+                <a href="#">Preferences</a>
+                <a href="/index">Log Out</a>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="probootstrap-cover">
+      <div class="limiter">
+        <div class="container-login100-2">
+          <div class="wrap-venue100">
+
+            <form class="login100-form-2">
+              <span class="login100-form-title-2">
+                Add Venue
+              </span>
+
+              <div class="form-group">
+                <input type="text" name="rname" class="form-control pb_height-50 reverse" placeholder="Room Name">
+              </div>
+
+              <div class="form-group">
+                  <select class="form-control pb_height-50 reverse" placeholder="College" name="college">
+                    <option value="" selected>--College--</option>
+                    <option value="">CASS</option>
+                    <option value="">CBAA</option>
+                    <option value="">CED</option>
+                    <option value="">CED-IDS</option>
+                    <option value="">COET</option>
+                    <option value="">CSM</option>
+                    <option value="">CON</option>
+                    <option value="">CON</option>
+                    <option value="">PRISM</option>
+                    <option value="">SCS</option>
+                  </select>
+              </div>
+
+              <span class="txt1">
+                  If others, please specify:
+              </span>
+              
+              <div class="form-group">
+                <input type="text" class="form-control pb_height-50 reverse" placeholder="Location">
+              </div>
+              <span class="txt1">
+                  Add Image
+              </span>
+
+            <form action="/action_page.php">
+              <input type="file" class="form-control pb_height-50 reverse" name="pic" accept="image/*">
+              <!-- <input type="submit" class="form-control pb_height-50 reverse"> -->
+            </form>
+          </form>
+
+          <form class="login100-form-2">
+            <span class="login100-form-waste-2"></span>
+
+              <span class="txt1">
+                Additional Information:
+              </span>
+
+              <div class="form-group">
+                <input type="text" name="capacity" class="form-control pb_height-50 reverse" placeholder="Capacity">
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="rate" class="form-control pb_height-50 reverse" placeholder="Rate">
+              </div>
+
+              <span class="txt1">
+                Equipments:
+              </span>
+
+              <div class="form-group">
+                <form method="post">
+                  <textarea name="comments" cols="30" rows="4" class="form-control pb_height-50 reverse" placeholder="List equipments here..."></textarea>
+                </form>
+              </div>
+
+              <div class="container-login100-form-btn">
+                <button class="login100-form-btn">
+                  Add Venue
+                </button>
+              </div>
+            </form>          
+          </div>
+        </div>
+      </div>  
+    </section>
+
+
+
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+
+</html>
+
+<!-- <div id="addVenue" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content -->
+    <!-- <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-content">
+        <span class="login100-form-title">
+                Sign Up For Free
+              </span>
+
+          <div class="probootstrap-image-grid">
+            <div class="row">
+              <div class="col-sm-6">
+                <form class="login100-form-3">
+              
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="text" name="fname" placeholder="First Name">
+                <span class="focus-input100-2"></span>
+              </div>
+
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="text" name="username" placeholder="Username">
+                <span class="focus-input100-2"></span>
+              </div>
+
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="password" name="pass" placeholder="Password">
+                <span class="focus-input100-2"></span>
+                <span class="symbol-input100-2">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+            </form>
+              </div>
+              <div class="col-sm-6">
+                <form class="login100-form-3">
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="text" name="fname" placeholder="Last Name">
+                <span class="focus-input100-2"></span>
+              </div>
+
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="email" name="email" placeholder="Email">
+                <span class="focus-input100-2"></span>
+                <span class="symbol-input100-2">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <div class="wrap-input100-2">
+                <input class="input100-2" type="password" name="pass" placeholder="Retype Password">
+                <span class="focus-input100-2"></span>
+                <span class="symbol-input100-2">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+            </form>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <form action="/action_page.php">
+                  <input type="file" class="btn btn-primary mr-2 mb-2" name="pic" accept="image/*">
+                  <input type="submit" class="btn btn-primary mr-2 mb-2">
+                </form>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div> -->
+<!-- </div> -->

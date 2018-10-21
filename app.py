@@ -1,5 +1,5 @@
 from flask import Flask,session, request, flash, url_for, redirect, render_template, abort ,g
-from forms import Registration, LogIn
+from forms import Registration, LogIn, AddVenue
 
 ##from flask-login import login_user , logout_user , current_user , login_required
 
@@ -19,7 +19,10 @@ def landing():
 
 @app.route("/login")
 def login():
-	return render_template('login.html')
+	form = LogIn()
+	#if
+	return render_template('login.html', title='Log In', form=form)
+
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -35,7 +38,10 @@ def venue():
 
 @app.route("/venue/add")
 def venue2():
-	return render_template('addvenue.html')
+	form = AddVenue()
+	# if
+	return render_template('addvenue.html', title='Add Venue', form=form)
+	
 # @app.route("/login", methods=['GET', 'POST'])
 # def call_login():
 # 	redirect(url_for('index')+'#modLogin')

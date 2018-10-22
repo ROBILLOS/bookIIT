@@ -1,51 +1,49 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, RadioField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 
 class Registration(FlaskForm):
 	fname = StringField('First Name',
-							validators=[DataRequired(), Length(min=5, max=20)])
+							validators=[InputRequired(), Length(min=2, max=20)])
 	lname = StringField('Last Name',
-							validators=[DataRequired(), Length(min=2, max=20)])
-	username = StringField('Username', 
-							validators=[DataRequired(), Length(min=5, max=16)])
+							validators=[InputRequired(), Length(min=2, max=20)])
+	username = StringField('Username',
+							validators=[InputRequired(), Length(min=5, max=16)])
 	email = StringField('Email',
-							validators=[DataRequired(), Email()])
+							validators=[InputRequired(), Email()])
 	password = PasswordField('Password',
-							validators=[DataRequired()])
+							validators=[InputRequired(), EqualTo('confirm_password', message='Passwords do not match,')])
 	confirm_password = PasswordField('Confirm Password',
-							validators=[DataRequired(), EqualTo('password')])
-	submit = SubmitField('Create Account')
+							validators=[InputRequired()])
 
-def validate_username(self, username):
-	user = User.query.filter_by(username=username.data).first()
-	if user:
-		raise ValidationError('That username already exists! Please use a different one.')
+#def validate_username(self, username):
+	#user = User.query.filter_by(username=username.data).first()
+	#if user:
+		#raise ValidationError('That username already exists! Please use a different one.')
 
-def validate_email(self, email):
-	user = User.query.filter_by(email=email.data).first()
-	if user:
-		raise ValidationError('That e-mail is already in use! Please use a different one.')
+#def validate_email(self, email):
+	#user = User.query.filter_by(email=email.data).first()
+	#if user:
+		#raise ValidationError('That e-mail is already in use! Please use a different one.')
 
 
 class LogIn(FlaskForm):
 	email = StringField('Email',
-							validators=[DataRequired(), Email()])
+							validators=[InputRequired(), Email()])
 	password = PasswordField('Password',
-							validators=[DataRequired()])
+							validators=[InputRequired()])
 	remember = BooleanField('Remember Me')
-	submit = SubmitField('Log In')
 
 class AddVenue(FlaskForm):
 	room = StringField('Room Name',
 							validators=[DataRequired()])
-	college = StringField('Password',
+	college = StringField('College',
 							validators=[DataRequired()])
 	location = StringField('Location',
 							validators=[Optional()])
-	capacity = StringField('Capacity',
+	capacity = IntegerField('Capacity',
 							validators=[Optional()])
-	rate = StringField('Rate',
+	rate = IntegerField('Rate',
 							validators=[Optional()])
 	equipment = StringField('Equipment',
 							validators=[Optional()])

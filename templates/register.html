@@ -35,6 +35,16 @@
           <div class="wrap-login100-2">
 
             <form class="login100-form validate-form" action="/register" method="POST">
+                {{ form.csrf_token }}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
               <span class="login100-form-title ">
                 Sign Up For Free
               </span>
@@ -87,13 +97,12 @@
               
                 <div class="wrap-input100">
                   <br>
-                  {{ form.submit(class="login100-form-btn")}}
+                    <input type="submit" class="login100-form-btn" value="Create Account">
                 </div>
               </div>
 
-
+            </form>
             </div>
-          </form>
         </div>
       </div>  
     </section>

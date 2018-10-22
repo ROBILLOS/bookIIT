@@ -34,7 +34,16 @@
         </div>
 
         <form class="login100-form-2 validate-form" action="/login" method="POST">
-
+            {{ form.csrf_token }}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
           <span class="login100-form-title">
             Member Login
           </span>
@@ -54,10 +63,8 @@
               <i class="fa fa-lock" aria-hidden="true"></i>
             </span>
           </div>
-          
-          <div class="container-login100-form-btn">
-            {{ form.submit(class="login100-form-btn") }}
-          </div>
+
+            <input type="submit" class="login100-form-btn" value="Login">
 
           <div class="text-center p-t-12">
             <span class="txt1">

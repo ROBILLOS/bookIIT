@@ -20,6 +20,11 @@ def main():
 def landing():
     return render_template('landing.html')
 
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template('profile.html')
+
 @app.route("/venue", methods=['GET'])
 @login_required
 def venue():
@@ -30,7 +35,7 @@ def venue():
 def logout():
     flash('You have logged out!')
     logout_user()
-    return redirect(url_for('main'))
+    return redirect(url_for('login'))
 
 @app.route("/register", methods=['GET','POST'])
 def register():

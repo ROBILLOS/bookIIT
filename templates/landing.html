@@ -26,8 +26,7 @@
             <div class="dropdown">
                 <button class="dropbtn"><img src="{{ url_for('static', filename='images/user.png') }}"></button>
                 <div class="dropdown-content">
-                <a href="#">Profile</a>
-                <a href="#">Preferences</a>
+                <a href="/profile">Profile</a>
                 <a href="/logout">Log Out</a>
               </div>
             </div>
@@ -42,6 +41,15 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md pl-md-3 pl-0 probootstrap-image-grid">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
             <div class="row">
               <div class="col-md-6">
                 <a class="probootstrap-img-item" href=""><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>

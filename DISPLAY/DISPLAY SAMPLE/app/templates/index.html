@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	<title>Student Database</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+
+
+<!-- 
+	<section class="cover">
+      	<div class="container">
+	        <div class="row vh-100 align-items-center text-center">
+	            <div class="col-sm">
+	            	<div class="text">
+	            		<h1 class="probootstrap-heading text-white mb-4"></h1><img src="{{ url_for('static', filename='images/studentdb.png') }}" alt="Home"</a></h1>
+	            		<br>
+	            		<br>
+	            		<a href="/register" class="btn btn-primary mr-2 mb-2">Add Student</a>
+						<a href="/delete" class="btn btn-primary mr-2 mb-2">Delete Student </a>
+						<a href="/update" class="btn btn-primary mr-2 mb-2">Update Student </a>
+						<a href="/search" class="btn btn-primary mr-2 mb-2">Search Student </a><br>
+	            	</div>
+	        	</div>
+	      	</div>
+	    </div>
+	</section> -->
+
+	<div class="tablewrap">
+		<table id="display">
+			<thead>
+	            <tr>
+	               <th colspan = "6" align="center"><b>Student Database</b></th>
+	            </tr>
+	         </thead>
+			<tr>
+				<th>Room</th>
+				<th>College</th>
+				<th>Capacity</th>
+				<th>Rate</th>
+				<th>Equipment</th>
+				<th>Options</th>
+			</tr>
+			<tbody>
+			{% for user in data %}
+			<tr>
+				<td>{{user[0]}}</td>
+				<td>{{user[1]}}</td>
+				<td>{{user[2]}}</td>
+				<td>{{user[3]}}</td>
+				<td>{{user[4]}}</td>
+
+				<td><a class="btn2 btn2-primary mr-2 mb-2">More Info</a>
+					<a href="#" class="btn2 btn2-primary mr-2 mb-2">Delete</a></td>
+			</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

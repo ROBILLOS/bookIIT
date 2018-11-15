@@ -1,3 +1,4 @@
+
 from config import db
 
 class Acc(db.Model):
@@ -77,7 +78,5 @@ class Room(db.Model):
         self.id = id
         self.name = name
         self.college = college
-
-
 
 

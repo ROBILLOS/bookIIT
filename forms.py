@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 
+import config
+
+
 class Registration(FlaskForm):
 	fname = StringField('First Name',
 							validators=[InputRequired(), Length(min=2, max=20)])
@@ -48,5 +51,4 @@ class AddVenue(FlaskForm):
 	equipment = StringField('Equipment',
 							validators=[Optional()])
 	submit = SubmitField('Add Venue')
-
 

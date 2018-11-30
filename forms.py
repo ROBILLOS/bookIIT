@@ -41,7 +41,7 @@ class AddVenue(FlaskForm):
 	name = StringField('Venue Name',
 							validators=[DataRequired()])
 	college = SelectField('College', id='college_id',
-							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering', 'College of Engineering'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Science', 'College of Arts and Social Science'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('School of Engineering Technology', 'School of Engineering Technology'), ('Integrated Developmental School', 'Integrated Developmental School')])
+							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering and Technology', 'College of Engineering and Technology'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Sciences', 'College of Arts and Social Sciences'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('Integrated Developmental School', 'Integrated Developmental School'), ('PRISM', 'PRISM')])
 	capacity = IntegerField('Capacity',
 							validators=[Optional()])
 	rate = IntegerField('Rate',

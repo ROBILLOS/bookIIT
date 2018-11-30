@@ -10,8 +10,8 @@ COLLEGENAMES = {
     'College of Business Administration and Accountancy': 6,
     'College of Nursing': 7,
     'School of Computer Studies': 8,
-    'School of Engineering Technology': 9,
-    'Integrated Developmental School': 10
+    'Integrated Developmental School': 9,
+    'PRISM': 10
 }
 
 class Acc(db.Model):

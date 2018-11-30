@@ -132,7 +132,7 @@ def addevent():
         db.session.add(newevent)
         db.session.commit()
     flash('Event created. An administrator will approve it later.')
-    return render_template('addevent.html', form=form)
+    return render_template('booking.html', form=form)
 
 @app.route("/event", methods=['GET'])
 @login_required
@@ -177,6 +177,7 @@ def load_user(acc_id):
     reg_user = Acc.query.filter_by(id=acc_id).first()
     return reg_user
 
+# db.create_all()
 if __name__ == "__main__":
     app.run(debug=True)
 

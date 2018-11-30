@@ -26,64 +26,75 @@
 </head>
 
 <body>
-
-					<div class="booking-form">
-						<form>
-							<div class="form-header">
-								<h2>Book an Event</h2>
-							</div>
-							<div class="form-group">
-								<input class="form-control" type="text" placeholder="Title">
-								<span class="form-label">Event Title</span>
-							</div>
-							<div class="form-group">
-								<input class="form-control" type="tel" placeholder="Description">
-								<span class="form-label">Event Description</span>
-							</div>
-							<div class="form-group">
-								<input class="form-control" type="tel" placeholder="venue name nani diretso">
-								<span class="form-label">Event Venue</span>
-							</div>
-							<div class="form-group">
-								<input class="form-control" type="tel" placeholder="Tags">
-								<span class="form-label">Event Tags</span>
-							</div>
-							<div class="form-group">
-								<select class="form-control" required>
-									<option value="" label="&nbsp;" selected hidden></option>
-									<option>30</option>
-									<option>50</option>
-									<option>100</option>
-									<option>250</option>
-									<option>500+</option>
-								</select>
-								<span class="select-arrow"></span>
-								<span class="form-label">Expected No. of Participants</span>
-							</div>
-                            <div class="form-group">
-                                <input class="form-control" type="date" required>
-                                <span class="form-label">Date</span>
-                            </div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="time" required>
-										<span class="form-label">From</span>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="time" required>
-										<span class="form-label">Till</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-btn">
-								<button class="submit-btn">Book Now</button>
-							</div>
-						</form>
+	<div class="booking-form">
+		<form>
+			<div class="form-header">
+				<h2>Book an Event</h2>
+			</div>
+			<div class="form-group">
+				{{ form.title(class="form-control", type="tel", placeholder="Title" ) }}
+				<!-- <input class="form-control" type="text" placeholder="Title"> -->
+				<span class="form-label">Event Title</span>
+			</div>
+			<div class="form-group">
+				{{ form.description(class="form-control", type="tel", placeholder="Description" ) }}
+				<!-- <input class="form-control" type="tel" placeholder="Description"> -->
+				<span class="form-label">Event Description</span>
+			</div>
+			<div class="form-group">
+				{{ form.venue(class="form-control", type="tel", placeholder="Venue" ) }}
+				<!-- <input class="form-control" type="tel" placeholder="venue name nani diretso"> -->
+				<span class="form-label">Event Venue</span>
+			</div>
+			<div class="form-group">
+				{{ form.tags(class="form-control", type="tel", placeholder="Tags" ) }}
+				<!-- <input class="form-control" type="tel" placeholder="Tags"> -->
+				<span class="form-label">Event Tags</span>
+			</div>
+			<div class="form-group">
+				{{ form.partnum(class="form-control", type="tel", placeholder="Number of Participants" ) }}
+				<!-- <input class="form-control" type="tel" placeholder="Tags"> -->
+				<span class="form-label">Number of Participants</span>
+			</div>
+			<!-- <div class="form-group">
+				<select class="form-control" required>
+					<option value="" label="&nbsp;" selected hidden></option>
+					<option>30</option>
+					<option>50</option>
+					<option>100</option>
+					<option>250</option>
+					<option>500+</option>
+				</select>
+				<span class="select-arrow"></span>
+				<span class="form-label">Expected No. of Participants</span>
+			</div> -->
+            <div class="form-group">
+				{{ form.date(class="form-control", type="date", placeholder="Date") }}
+                <!-- <input class="form-control" type="date" required> -->
+                <span class="form-label">Date</span>
+            </div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						{{ form.start(class="form-control", type="time", placeholder="Start Time") }}
+						<!-- <input class="form-control" type="time" required> -->
+						<span class="form-label">Starts From</span>
 					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						{{ form.end(class="form-control", type="time", placeholder="End Time" ) }}
+						<!-- <input class="form-control" type="time" required> -->
+						<span class="form-label">Till</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-btn">
+				 {{ form.submit(class="submit-btn")}}
+			</div>
+		</form>
+	</div>
 
 
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>

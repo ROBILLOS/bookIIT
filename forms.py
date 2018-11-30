@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField,DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
-
+from wtforms_components import TimeField 
 import config
 
 
@@ -49,3 +49,22 @@ class AddVenue(FlaskForm):
 	equipment = StringField('Equipment',
 							validators=[Optional()])
 	submit = SubmitField('Add Venue')
+
+class AddEvent(FlaskForm):
+	title = StringField('Title',
+							validators=[DataRequired()])
+	description = StringField('Description',
+							validators=[DataRequired()])
+	venue = StringField('Venue',
+							validators=[DataRequired()])
+	tags = StringField('Tags',
+							validators=[Optional()])
+	partnum = IntegerField('Participants',
+							validators=[Optional()])
+	date = DateField('Date', format="%m/%d/%Y", 
+							validators=[DataRequired()])
+	start = TimeField('Start Time',
+							validators=[DataRequired()])
+	end = TimeField('End Time',
+							validators=[DataRequired()])
+	submit = SubmitField('Request Event')

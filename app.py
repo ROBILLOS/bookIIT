@@ -1,5 +1,6 @@
+import flask
 from flask import request, flash, url_for, redirect, render_template
-from forms import Registration, LogIn,AddVenue
+from forms import Registration, LogIn,AddVenue, AddEvent
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
 from Models import Acc, User, Venue, Event, College, Admin_acc, COLLEGENAMES
@@ -126,12 +127,13 @@ def deletevenue(id):
 @app.route("/addevent", methods=['GET', 'POST'])
 @login_required
 def addevent():
-    form = AddVenue()#(AddEvent()
-    if form.validate_on_submit():
-        newevent = Event(name=form.name.data, date=form.date.data, tags=form.tags.data, status='Pending for approval', venue=form.venue.data)
-        db.session.add(newevent)
-        db.session.commit()
-    flash('Event created. An administrator will approve it later.')
+    form = AddEvent()
+    if flask.request.method == 'POST':
+        if form.validate_on_submit():
+            newevent = Event(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.part.data, date=form.date.data, start=form.start.data, end=form.end.data, status='Pending for approval')
+            db.session.add(newevent)
+            db.session.commit()
+        flash('Event created. An administrator will approve it later.')
     return render_template('booking.html', form=form)
 
 @app.route("/event", methods=['GET'])

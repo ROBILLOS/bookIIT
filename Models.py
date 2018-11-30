@@ -107,16 +107,24 @@ class Event(db.Model):
     organizer = db.Column('organizer_id', db.Integer)
     venue = db.Column('venue_id', db.Integer)
     id = db.Column('event_id', db.Integer , primary_key=True)
-    name = db.Column('event_name', db.String())
-    desc = db.Column('event_desc', db.String())
+    title = db.Column('event_name', db.String())
+    description = db.Column('event_desc', db.String())
     tags = db.Column('event_tags', db.String())
     date = db.Column('event_date', db.Date())
-    time = db.Column('event_time', db.Time())
-    participantnum = db.Column('expected_participants', db.Integer)
+    start = db.Column('event_time_s', db.Time())
+    end = db.Column('event_time_e', db.Time())
+    partnum = db.Column('expected_participants', db.Integer())
 
-    def __init__(self, name):
-        self.id = id
-        self.name = name
+    def __init__(self, organizer, venue, title, description, tags, date, start, end, partnum):
+        self.organizer = organizer
+        self.title = title
+        self.description = description
+        self.venue = venue
+        self.tags = tags
+        self.date = date
+        self.start = start
+        self.end = end
+        self.partnum = partnum
 
 
 

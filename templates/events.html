@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>BookIIT - Admin</title>
+    <title>Venue - Add</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/eventstyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
   </head>
 
   <body>
@@ -39,37 +41,33 @@
 
     <section class="probootstrap-section">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md pl-md-3 pl-0 probootstrap-image-grid">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul class=flashes>
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-            <div class="row">
-              <div class="col-md-6">
-                <a class="probootstrap-img-item" href="/event"><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>
-                <div class="texttest">
-                  <p>Manage Events</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <a class="probootstrap-img-item" href="/venue"><div style="background-image: url(../static/images/office.jpg); background-position: center;"></div></a>
-                <div class="texttest">
-                  <p>Manage Venues</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row">
+{#            {{% for xx in xx %}}#}
+            <ul class="event-list">
+                <li>
+                    <time datetime="2014-07-20">
+                        <span class="day">day</span> <!--  insert day here  -->
+                        <span class="month">month</span> <!--  insert month here  -->
+                        <span class="year">year</span> <!--  insert year here  -->
+                        <span class="time">time</span> <!-- insert time  -->
+                    </time>
+                    <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" /> <!--  insert image here  -->
+                    <div class="info">
+                        <h2 class="title">title</h2> <!--  insert title here  -->
+                        <p class="desc">catchphrase</p> <!--  insert catchphrase  -->
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <button class="approved"><img src="{{ url_for('static', filename='images/approved.png') }}" width="50" height="50"></button>
+                            <button class="rejected"><img src="{{ url_for('static', filename='images/rejected.png') }}" width="50" height="50"></button>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+{#            {{% end for %}}#}
         </div>
       </div>
     </section>
-
-    
 
     <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
@@ -77,3 +75,4 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
+

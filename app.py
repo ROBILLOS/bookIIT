@@ -130,7 +130,7 @@ def addevent():
     form = AddEvent()
     if flask.request.method == 'POST':
         print('imong mama')
-        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue='3', tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data)
+        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data)
         db.session.add(newevent)
         db.session.commit()
         flash('Event created. An administrator will approve it later.')

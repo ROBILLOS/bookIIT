@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{current_user.username}}'s Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/msulogo.png') }}"/>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/landing"><img src="{{ url_for('static', filename='images/logo.png') }}" width="150" height="75"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="probootstrap-nav">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item"><a href="" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li> -->
+            <div class="dropdown">
+                <button class="dropbtn"><img src="{{ url_for('static', filename='images/dog.png') }}" width="60" height="60";"></button>
+                <div class="dropdown-content">
+                <a href="#">Profile</a>
+                <a href="/logout">Log Out</a>
+              </div>
+            </div>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="probootstrap-section">
+      <div class="container">
+        <div class="row profile">
+          <div class="col-md-3">
+            <div class="profile-sidebar">
+              <!-- SIDEBAR USERPIC -->
+              <div class="profile-userpic">
+                <img src="{{ url_for('static', filename='images/dog.png') }}">
+              </div>
+              <!-- END SIDEBAR USERPIC -->
+              <!-- SIDEBAR USER TITLE -->
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  {{current_user.username}}
+                </div>
+                <div class="profile-usertitle-job">
+                  {{current_user.email}}
+                </div>
+              </div>
+              <!-- END SIDEBAR USER TITLE -->
+              <!-- SIDEBAR BUTTONS -->
+              <div class="profile-userbuttons">
+                <!-- <button type="button" class="btn btn-success btn-sm">Create Event</button> -->
+                <a href="/bookevent" class="btn btn-success btn-sm">Create Event</a>
+              </div>
+              <!-- END SIDEBAR BUTTONS -->
+              <!-- SIDEBAR MENU -->
+              <div class="profile-usermenu">
+                <ul>
+                  <li class="active">
+                    <a href="#">
+                    <!-- <i class="glyphicon glyphicon-home"></i> -->
+                    Calendar </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                    <!-- <i class="glyphicon glyphicon-user"></i> -->
+                    Account Settings </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                    <!-- <i class="glyphicon glyphicon-ok"></i> -->
+                    Tasks </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                    <!-- <i class="glyphicon glyphicon-flag"></i> -->
+                    Help </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- END MENU -->
+            </div>
+          </div>
+          <div class="col-md-9">
+                  <div class="profile-content">
+                    <div id="calendar"></div>
+                  </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+  </body>
+</html>

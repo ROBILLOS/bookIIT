@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="612" version="1.1" style="background: #FFFFFF;"><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Desktop HD</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        
+        
+    <filter id="f093" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:label="Fancy blur" inkscape:menu="Blurs" inkscape:menu-tooltip="Smooth colorized contour which allows desaturation and hue rotation" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="5" result="result1"/>
+            <feComposite operator="arithmetic" k2="2" in="result1" in2="result1"/>
+        </filter></defs>
+    
+<g class="currentLayer" style=""><title>Layer 1</title>
+        
+            
+            
+        
+    <g class="selected"><path fill="#44000c" fill-opacity="1" stroke="none" stroke-opacity="1" stroke-width="1" stroke-dasharray="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="0.96" marker-start="" marker-mid="" marker-end="" filter="" d="M0,0 L1440,0 L1440,617 L0,617 L0,0 Z" id="Rectangle" class=""/><polygon id="Triangle" fill="#44000c" transform="rotate(-4 1104.6954345703125,321.4855346679679) translate(-1104.6954345703125,-321.48553466796875) " points="2211.890869140625,267.4710693359375 2826.890869140625,1018.4710693359375 1596.890869140625,1018.4710693359375 " class="" fill-opacity="1" opacity="0.9"/></g></g></svg>

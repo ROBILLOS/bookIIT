@@ -102,7 +102,7 @@ class College(db.Model):
         self.id = id
         self.name = name
 
-class Event(db.Model):
+class Events(db.Model):
     __tablename__ = "events"
     organizer = db.Column('organizer_id', db.Integer)
     venue = db.Column('venue_id', db.Integer)

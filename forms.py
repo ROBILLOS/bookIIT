@@ -55,13 +55,13 @@ class AddEvent(FlaskForm):
 							validators=[DataRequired()])
 	description = StringField('Description',
 							validators=[DataRequired()])
-	venue = StringField('Venue',
+	venue = IntegerField('Venue',
 							validators=[DataRequired()])
 	tags = StringField('Tags',
 							validators=[Optional()])
 	partnum = IntegerField('Participants',
 							validators=[Optional()])
-	date = DateField('Date', format="%m/%d/%Y", 
+	date = DateField('Date', 
 							validators=[DataRequired()])
 	start = TimeField('Start Time',
 							validators=[DataRequired()])

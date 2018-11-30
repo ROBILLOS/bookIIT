@@ -3,7 +3,7 @@ from flask import request, flash, url_for, redirect, render_template
 from forms import Registration, LogIn,AddVenue, AddEvent
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
-from Models import Acc, User, Venue, Event, College, Admin_acc, COLLEGENAMES
+from Models import Acc, User, Venue, Events, College, Admin_acc, COLLEGENAMES
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -129,10 +129,10 @@ def deletevenue(id):
 def addevent():
     form = AddEvent()
     if flask.request.method == 'POST':
-        if form.validate_on_submit():
-            newevent = Event(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.part.data, date=form.date.data, start=form.start.data, end=form.end.data, status='Pending for approval')
-            db.session.add(newevent)
-            db.session.commit()
+        print('imong mama')
+        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue='3', tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data)
+        db.session.add(newevent)
+        db.session.commit()
         flash('Event created. An administrator will approve it later.')
     return render_template('booking.html', form=form)
 

@@ -27,7 +27,7 @@
             <div class="dropdown">
                 <button class="dropbtn"><img src="{{ url_for('static', filename='images/user.png') }}"></button>
                 <div class="dropdown-content">
-                <a href="#">Profile</a>
+                <a href="/profile">Profile</a>
                 <a href="#">Preferences</a>
                 <a href="/logout">Log Out</a>
               </div>
@@ -43,7 +43,7 @@
         <div class="container-login100-2">
           <div class="wrap-venue100">
 
-            <form class="login100-form validate-form" action="/addvenue" method="POST">
+            <form class="login100-form validate-form" action="/editvenue/{{ venue.id }}" method="POST">
                 {{ form.csrf_token }}
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -55,7 +55,7 @@
                     {% endif %}
                 {% endwith %}
               <span class="login100-form-title-2">
-                Add Venue
+                Edit Venue
               </span>
 
               <div class="row">
@@ -70,22 +70,22 @@
 
               <div class="row">
                 <div class="venueform-wrap">
-                  {{ form.name(class="form-control pb_height-50 reverse", placeholder="Venue Name" ) }}
+                  {{ form.name(class="form-control pb_height-50 reverse", placeholder="Venue Name", value=venue.name) }}
                 </div>
 
                 <div class="venueform-wrap">
-                {{ form.capacity(class="form-control pb_height-50 reverse", placeholder="Capacity" ) }}
+                {{ form.capacity(class="form-control pb_height-50 reverse", placeholder="Capacity", value=venue.capacity) }}
                 </div>
-                
+
               </div>
 
               <div class="row">
                 <div class="venueform-wrap">
-                  {{ form.college(class="form-control pb_height-50 reverse", placeholder="College" ) }}
+                  {{ form.college(class="form-control pb_height-50 reverse", placeholder="College", id='college') }}
                 </div>
-              
+                  <script>document.getElementByID("college_id").selectedIndex = "{{ venue.college + 1}}";</script>
                 <div class="venueform-wrap">
-                  {{ form.rate(class="form-control pb_height-50 reverse", placeholder="Rate (Php/hr)" ) }}
+                  {{ form.rate(class="form-control pb_height-50 reverse", placeholder="Rate (Php/hr)", value=venue.rate) }}
                 </div>
               </div>
               
@@ -98,13 +98,11 @@
                 Equipments:
               </span>
               </div>
-
-
                 
                 <div class="venueform-wrap">
-                  {{ form.equipment(class="form-control pb_height-50 reverse", placeholder="Equipments" ) }}
+                  {{ form.equipment(class="form-control pb_height-50 reverse", placeholder="Equipments", value=venue.equipment) }}
                 </div>
-              </div>
+
               
              
                 <!-- <div class="row">
@@ -120,7 +118,7 @@
                 </div>
  -->
               <div class="container-login100-form-btn">
-                {{ form.submit(class="login100-form-btn")}}
+                {{ form.submit(class="login100-form-btn", value="Edit Venue")}}
               </div>
             </form>          
           </div>

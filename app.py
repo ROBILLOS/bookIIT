@@ -2,13 +2,13 @@ from flask import request, flash, url_for, redirect, render_template
 from forms import Registration, LogIn,AddVenue
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
-from Models import Acc,User,Venue,Location,Room
+from Models import Acc, User, Venue, Event, College, Admin_acc, COLLEGENAMES
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = "You have logged out."
-#separate as routes.py if linecount is great-----------------------------
+
 @app.route("/")
 
 @app.route("/index", methods=['GET','POST'])
@@ -28,7 +28,9 @@ def profile():
 @app.route("/venue", methods=['GET'])
 @login_required
 def venue():
-    return render_template('venue.html')
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('venue.html', venues=venues, colleges=colleges)
 
 @app.route("/logout")
 @login_required
@@ -82,31 +84,97 @@ def login():
 def addvenue():
     form = AddVenue()
     if form.validate_on_submit():
-        #If Location isn't filled up, use room name and college
-        if form.location.data == '' or form.location.data == None:
-            newvenue = Venue(capacity=form.capacity.data, rate=form.rate.data, equipment=form.equipment.data, venue_type='Room')
-            db.session.add(newvenue)
-            db.session.commit()
-            venueroom = Room(id=Venue.get_id(newvenue), name=form.room.data, college=form.college.data)
-            db.session.add(venueroom)
-            db.session.commit()
-        #If Location is filled up, use location instead
-        elif form.location.data != '':
-            newvenue = Venue(capacity=form.capacity.data, rate=form.rate.data, equipment=form.equipment.data, venue_type='Non-College Location')
-            db.session.add(newvenue)
-            db.session.commit()
-            location = Location(id=Venue.get_id(newvenue), name=form.location.data)
-            db.session.add(location)
-            db.session.commit()
+        #Venues are now all stored in the venues table. They only differ with college id. reference the initialize college script for college ids.
+        newvenue = Venue(name=form.name.data, college=form.college.data, capacity=form.capacity.data, rate=form.rate.data, equipment=form.equipment.data)
+        #Note that college will accept String values, specifically only those specified in the dictionary added in Models.py
+        #If string doesn't match, by default, it will take on the value of 1/ 'MSU-IIT'.
+        #Those string values are converted to corresponding id numbers of those colleges in the db.
+        db.session.add(newvenue)
+        db.session.commit()
         flash('Venue created.')
         return redirect(url_for('venue'))
     return render_template('addvenue.html', form=form)
-#separate as routes.py if linecount is great-----------------------------
+
+@app.route("/editvenue/<int:id>", methods=['GET', 'POST'])
+@login_required
+def editvenue(id):
+    venue = Venue.query.filter_by(id=id).first()
+    form = AddVenue()
+    if form.validate_on_submit():
+        venue.name = form.name.data
+        venue.college = COLLEGENAMES.get(form.college.data)
+        venue.capacity = form.capacity.data
+        venue.rate = form.rate.data
+        venue.equipment = form.equipment.data
+        db.session.commit()
+        flash('Venue created.')
+        return redirect(url_for('venue'))
+    return render_template('editvenue.html', form=form, venue=venue)
+
+@app.route("/deletevenue/<int:id>", methods=['GET','POST'])
+@login_required
+def deletevenue(id):
+    venue = Venue.query.filter_by(id=id).first()
+    if venue != None:
+        db.session.delete(venue)
+        db.session.commit()
+        flash('Event has been deleted.')
+    else:
+        flash('No such event exists!')
+    return redirect(url_for('venue'))
+
+@app.route("/addevent", methods=['GET', 'POST'])
+@login_required
+def addevent():
+    form = AddVenue()#(AddEvent()
+    if form.validate_on_submit():
+        newevent = Event(name=form.name.data, date=form.date.data, tags=form.tags.data, status='Pending for approval', venue=form.venue.data)
+        db.session.add(newevent)
+        db.session.commit()
+    flash('Event created. An administrator will approve it later.')
+    return render_template('addevent.html', form=form)
+
+@app.route("/event", methods=['GET'])
+@login_required
+def event():
+    venues = Venue.query.all()
+    events = Event.query.all()
+    return render_template('events.html', venues=venues, events=events)
+
+@app.route("/editevent/<int:id>", methods=['GET','POST'])
+@login_required
+def editevent(id):
+    event = Event.query.filter_by(id=id).first()
+    venue = Venue.query.all()
+    form = AddVenue() #EditVenue()
+    if form.validate_on_submit():
+        event.organizer = current_user
+        event.name = form.name.data
+        event.date=form.date.data
+        event.time=form.time.data
+        event.tags=form.tags.data
+        #event.status=form.status.data------------not yet tested. will implement after admin acc is properly implemented.
+        event.venue=form.venue.data
+        event.participantnum=form.participantnum.data
+        db.session.commit()
+        return redirect(url_for('events'))
+    return render_template('editevent.html', form=form, event=event, venue=venue)
+
+@app.route("/deleteevent/<int:id>", methods=['GET','POST'])
+@login_required
+def deleteevent(id):
+    event = Event.query.filter_by(id=id).first()
+    if event != None:
+        db.session.delete(event)
+        db.session.commit()
+        flash('Event has been deleted.')
+    else:
+        flash('No such event exists!')
+    return redirect(url_for('events'))
 
 @login_manager.user_loader
 def load_user(acc_id):
     reg_user = Acc.query.filter_by(id=acc_id).first()
-    #User.query.get(int(acc_id))
     return reg_user
 
 if __name__ == "__main__":

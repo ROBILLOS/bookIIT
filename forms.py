@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 
 import config
@@ -38,12 +38,10 @@ class LogIn(FlaskForm):
 	remember = BooleanField('Remember Me')
 
 class AddVenue(FlaskForm):
-	room = StringField('Room Name',
+	name = StringField('Venue Name',
 							validators=[DataRequired()])
-	college = StringField('College',
-							validators=[DataRequired()])
-	location = StringField('Location',
-							validators=[Optional()])
+	college = SelectField('College', id='college_id',
+							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering', 'College of Engineering'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Science', 'College of Arts and Social Science'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('School of Engineering Technology', 'School of Engineering Technology'), ('Integrated Developmental School', 'Integrated Developmental School')])
 	capacity = IntegerField('Capacity',
 							validators=[Optional()])
 	rate = IntegerField('Rate',
@@ -51,4 +49,3 @@ class AddVenue(FlaskForm):
 	equipment = StringField('Equipment',
 							validators=[Optional()])
 	submit = SubmitField('Add Venue')
-

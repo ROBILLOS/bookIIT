@@ -13,8 +13,20 @@ login_manager.login_message = "You have logged out."
 @app.route("/")
 
 @app.route("/index", methods=['GET','POST'])
-def main():
-    return render_template('index.html')
+def login():
+    form = LogIn(request.form)
+    if form.validate_on_submit():
+        #Does email exist in db?
+        user = Acc.query.filter_by(email=form.email.data).first()
+        if user:
+            #Is pass correct?
+            if user.password == form.password.data:
+                #If email exists and pass is correct, login.
+                login_user(user)
+                flash('Logged in successfully.')
+                return redirect(url_for('landing'))
+        flash ('Invalid email or password.', 'error')
+    return render_template('index.html', form=form)
 
 @app.route("/landing")
 @login_required
@@ -65,7 +77,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login2():
     form = LogIn(request.form)
     if form.validate_on_submit():
         #Does email exist in db?

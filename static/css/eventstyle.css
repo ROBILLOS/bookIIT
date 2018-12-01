@@ -32,7 +32,8 @@
 		background-color: rgb(165, 82, 167);
 	}
 	.event-list > li > time > span {
-		display: none;
+		/*display: none;*/
+		font-size: 10pt;
 	}
 	.event-list > li > time > .day {
 		display: block;
@@ -42,7 +43,7 @@
 	}
 	.event-list > li time > .month {
 		display: block;
-		font-size: 24pt;
+		font-size: 16pt;
 		font-weight: 900;
 		line-height: 1;
 	}
@@ -59,6 +60,11 @@
 		margin: 0px;
 	}
 	.event-list > li > .info > .desc {
+		font-size: 13pt;
+		font-weight: 300;
+		margin: 0px;
+	}
+	.event-list > li > .info > .stat {
 		font-size: 13pt;
 		font-weight: 300;
 		margin: 0px;
@@ -150,10 +156,14 @@
 			height: 120px;
 			text-align: left;
 			padding-right: 40px;
+			line-height: 1.5;
 		}
 		.event-list > li > .info > .title,
 		.event-list > li > .info > .desc {
 			padding: 0px 10px;
+		}
+		.event-list > li > .info > .stat {
+			padding: 0px 650px;
 		}
 		.event-list > li > .info > ul {
 			position: absolute;

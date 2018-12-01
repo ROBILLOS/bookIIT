@@ -140,13 +140,13 @@ def addevent():
 @login_required
 def event():
     venues = Venue.query.all()
-    events = Event.query.all()
+    events = Events.query.all()
     return render_template('events.html', venues=venues, events=events)
 
 @app.route("/editevent/<int:id>", methods=['GET','POST'])
 @login_required
 def editevent(id):
-    event = Event.query.filter_by(id=id).first()
+    event = Events.query.filter_by(id=id).first()
     venue = Venue.query.all()
     form = AddVenue() #EditVenue()
     if form.validate_on_submit():

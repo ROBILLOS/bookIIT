@@ -36,7 +36,8 @@ def landing():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html')
+    events = Events.query.all()
+    return render_template('profile.html', events=events)
 
 @app.route("/venue", methods=['GET'])
 @login_required

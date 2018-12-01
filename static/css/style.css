@@ -28,20 +28,9 @@ h1, h2, h3, h4, h5 {
   letter-spacing: 2px;
   word-spacing: 2px;
   text-align: center;
-  color: #ffffff;
+  color: #ffffff, 0.5;
 }
 
-.modal {
-    position: fixed;
-    top: 85px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    overflow: hidden;
-    outline: 0;
-}
 
 .probootstrap-nav {
   padding: 20px 0;

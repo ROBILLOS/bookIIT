@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
+from wtforms_components import TimeField 
+import config
+
 
 class Registration(FlaskForm):
 	fname = StringField('First Name',
@@ -35,17 +38,15 @@ class LogIn(FlaskForm):
 	remember = BooleanField('Remember Me')
 
 class AddVenue(FlaskForm):
-	room = StringField('Room Name',
+	name = StringField('Venue Name',
 							validators=[DataRequired()])
-	college = StringField('College',
-							validators=[DataRequired()])
-	location = StringField('Location',
-							validators=[Optional()])
+	college = SelectField('College', id='college_id',
+							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering and Technology', 'College of Engineering and Technology'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Sciences', 'College of Arts and Social Sciences'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('Integrated Developmental School', 'Integrated Developmental School'), ('Premier Research Institute of Science and Mathematics', 'Premier Research Institute of Science and Mathematics')])
 	capacity = IntegerField('Capacity',
 							validators=[Optional()])
 	rate = IntegerField('Rate',
 							validators=[Optional()])
-	equipment = StringField('Equipment',
+	equipment = TextAreaField('Equipment',
 							validators=[Optional()])
 	submit = SubmitField('Add Venue')
 
@@ -54,13 +55,16 @@ class AddEvent(FlaskForm):
 							validators=[DataRequired()])
 	description = StringField('Description',
 							validators=[DataRequired()])
-	date = StringField('Day',
+	venue = SelectField('Venue',
+							validators=[DataRequired()], choices=[('1', 'Gymnasium'), ('2','ICT 3H')])
+	tags = StringField('Tags',
+							validators=[Optional()])
+	partnum = IntegerField('Participants',
+							validators=[Optional()])
+	date = DateField('Date', 
 							validators=[DataRequired()])
-	month = IntegerField('Month',
+	start = TimeField('Start Time',
 							validators=[DataRequired()])
-	year = IntegerField('Year',
-							validators=[DataRequired()])
-	venue = StringField('Venue',
+	end = TimeField('End Time',
 							validators=[DataRequired()])
 	submit = SubmitField('Request Event')
-

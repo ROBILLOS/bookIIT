@@ -42,11 +42,11 @@
     <section class="probootstrap-section">
       <div class="container">
         <div class="row">
-{#            {{% for xx in xx %}}#}
+            {{% for event in events %}}
             <ul class="event-list">
                 <li>
                     <time datetime="2014-07-20">
-                        <span class="day">day</span> <!--  insert day here  -->
+                        <span class="day">{{ event.date }}</span> <!--  insert day here  -->
                         <span class="month">month</span> <!--  insert month here  -->
                         <span class="year">year</span> <!--  insert year here  -->
                         <span class="time">time</span> <!-- insert time  -->

@@ -27,7 +27,7 @@
           <ul class="navbar-nav ml-auto">
             <!-- <li class="nav-item"><a href="" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li> -->
             <div class="dropdown">
-                <button class="dropbtn"><img src="{{ url_for('static', filename='images/dog.png') }}" width="60" height="60";"></button>
+                <button class="dropbtn"><img src="{{ url_for('static', filename='images/dog.png') }}" width="60" height="60"></button>
                 <div class="dropdown-content">
                 <a href="#">Profile</a>
                 <a href="/logout">Log Out</a>
@@ -94,19 +94,49 @@
             </div>
           </div>
           <div class="col-md-9">
-                  <div class="profile-content">
-                    <div id="calendar"></div>
+              <div class="profile-content">
+                  {%  for event in events %}
+                  <div class="card" style="width: 18rem;">
+                      <img class="card-img-top" src="{{ url_for('static', filename='images/obama.jpg') }}" alt="Card image cap">
+                      <div class="card-body">
+                        <p hidden>{{ event.event_id }}</p>
+                        <h5 class="card-title">{{ event.title }}</h5>
+{#                        <p class="card-text">{{ event.description }}</p>#}
+                        <a class="btn2 btn2-primary" data-toggle="modal" data-target="#event{{ event.event_id }}">More Info</a>
+                      </div>
                   </div>
+                  {% endfor %}
+              </div>
           </div>
         </div>
       </div>
     </section>
 
+    {% for event in events %}
+        <div id="event{{ event.event_id }}" class="modal fade" role="dialog">
+            <div class="modal-dialog"1>
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ event.title }}</h4>
+                  </div>
+                  <div class="modal-body2">
+                    <p>{{ event.description }}</p>
+                    <p>{{ event.date.strftime("%d-%B-%Y") }}</p>
+                    <p>{{ event.start.strftime("%I:%M %p") }} - {{ event.end.strftime("%I:%M %p") }}</p>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn2 btn2-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
     <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
   </body>
 </html>

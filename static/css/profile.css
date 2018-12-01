@@ -12,7 +12,7 @@ Licensed under MIT
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px 0 10px 0;
-  background: #fff;
+  background: #260007;
 }
 
 .profile-userpic img {
@@ -104,7 +104,7 @@ Licensed under MIT
 /* Profile Content */
 .profile-content {
   padding: 20px;
-  background: #fff;
+  background: #260007;
   min-height: 460px;
 }
 

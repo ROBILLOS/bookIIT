@@ -13,8 +13,20 @@ login_manager.login_message = "You have logged out."
 @app.route("/")
 
 @app.route("/index", methods=['GET','POST'])
-def main():
-    return render_template('index.html')
+def login():
+    form = LogIn(request.form)
+    if form.validate_on_submit():
+        #Does email exist in db?
+        user = Acc.query.filter_by(email=form.email.data).first()
+        if user:
+            #Is pass correct?
+            if user.password == form.password.data:
+                #If email exists and pass is correct, login.
+                login_user(user)
+                flash('Logged in successfully.')
+                return redirect(url_for('landing'))
+        flash ('Invalid email or password.', 'error')
+    return render_template('index.html', form=form)
 
 @app.route("/landing")
 @login_required
@@ -24,7 +36,8 @@ def landing():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html')
+    events = Events.query.all()
+    return render_template('profile.html', events=events)
 
 @app.route("/venue", methods=['GET'])
 @login_required
@@ -65,7 +78,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login2():
     form = LogIn(request.form)
     if form.validate_on_submit():
         #Does email exist in db?
@@ -130,7 +143,7 @@ def addevent():
     form = AddEvent()
     if flask.request.method == 'POST':
         print('imong mama')
-        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data)
+        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data, status='Pending')
         db.session.add(newevent)
         db.session.commit()
         flash('Event created. An administrator will approve it later.')
@@ -140,13 +153,13 @@ def addevent():
 @login_required
 def event():
     venues = Venue.query.all()
-    events = Event.query.all()
+    events = Events.query.all()
     return render_template('events.html', venues=venues, events=events)
 
 @app.route("/editevent/<int:id>", methods=['GET','POST'])
 @login_required
 def editevent(id):
-    event = Event.query.filter_by(id=id).first()
+    event = Events.query.filter_by(id=id).first()
     venue = Venue.query.all()
     form = AddVenue() #EditVenue()
     if form.validate_on_submit():

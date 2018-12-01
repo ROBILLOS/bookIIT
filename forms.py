@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField,DateField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 from wtforms_components import TimeField 
 import config
@@ -41,12 +41,12 @@ class AddVenue(FlaskForm):
 	name = StringField('Venue Name',
 							validators=[DataRequired()])
 	college = SelectField('College', id='college_id',
-							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering and Technology', 'College of Engineering and Technology'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Sciences', 'College of Arts and Social Sciences'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('Integrated Developmental School', 'Integrated Developmental School'), ('PRISM', 'PRISM')])
+							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering and Technology', 'College of Engineering and Technology'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Sciences', 'College of Arts and Social Sciences'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('Integrated Developmental School', 'Integrated Developmental School'), ('Premier Research Institute of Science and Mathematics', 'Premier Research Institute of Science and Mathematics')])
 	capacity = IntegerField('Capacity',
 							validators=[Optional()])
 	rate = IntegerField('Rate',
 							validators=[Optional()])
-	equipment = StringField('Equipment',
+	equipment = TextAreaField('Equipment',
 							validators=[Optional()])
 	submit = SubmitField('Add Venue')
 

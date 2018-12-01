@@ -114,8 +114,9 @@ class Events(db.Model):
     start = db.Column('event_time_s', db.Time())
     end = db.Column('event_time_e', db.Time())
     partnum = db.Column('expected_participants', db.Integer())
+    status = db.Column('event_status', db.String())
 
-    def __init__(self, organizer, venue, title, description, tags, date, start, end, partnum):
+    def __init__(self, organizer, venue, title, description, tags, date, start, end, partnum, status ):
         self.organizer = organizer
         self.title = title
         self.description = description
@@ -125,6 +126,7 @@ class Events(db.Model):
         self.start = start
         self.end = end
         self.partnum = partnum
+        self.status = status
 
 
 

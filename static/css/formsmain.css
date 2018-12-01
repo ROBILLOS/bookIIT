@@ -620,7 +620,7 @@ iframe {
 
   display: block;
   width: 100%;
-  background: #;
+  background: #fff;
   height: 50px;
   border-radius: 25px;
   padding: 0 30px 0 68px;
@@ -648,7 +648,7 @@ iframe {
   z-index: 1;
   margin-bottom: 10px;
   margin-left: auto;
-  padding: 0px, 100px, 0px, 100px;
+  padding: 0px 100px 0px 100px;
 }
 
 .venueform-wrap-2 {
@@ -657,7 +657,7 @@ iframe {
   z-index: 1;
   margin-bottom: 10px;
   margin-left: 38px;
-  padding: 0px, 100px, 0px, 100px;
+  padding: 0px 100px 0px 100px;
 }
 
 .venue-txt {

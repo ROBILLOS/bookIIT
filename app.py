@@ -141,12 +141,14 @@ def deletevenue(id):
 @login_required
 def addevent():
     form = AddEvent()
-    if flask.request.method == 'POST':
-        print('imong mama')
+
+    print form.validate_on_submit()
+    if form.validate_on_submit():
         newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data, status='Pending')
         db.session.add(newevent)
         db.session.commit()
         flash('Event created. An administrator will approve it later.')
+        return redirect(url_for('profile'))
     return render_template('booking.html', form=form)
 
 @app.route("/event", methods=['GET'])
@@ -154,7 +156,8 @@ def addevent():
 def event():
     venues = Venue.query.all()
     events = Events.query.all()
-    return render_template('events.html', venues=venues, events=events)
+    users = User.query.all()
+    return render_template('events.html', venues=venues, events=events, users=users)
 
 @app.route("/editevent/<int:id>", methods=['GET','POST'])
 @login_required
@@ -162,13 +165,13 @@ def editevent(id):
     event = Events.query.filter_by(id=id).first()
     venue = Venue.query.all()
     form = AddVenue() #EditVenue()
+
     if form.validate_on_submit():
-        event.organizer = current_user
+        event.organizer = current_user.id
         event.name = form.name.data
         event.date=form.date.data
         event.time=form.time.data
         event.tags=form.tags.data
-        #event.status=form.status.data------------not yet tested. will implement after admin acc is properly implemented.
         event.venue=form.venue.data
         event.participantnum=form.participantnum.data
         db.session.commit()
@@ -186,6 +189,22 @@ def deleteevent(id):
     else:
         flash('No such event exists!')
     return redirect(url_for('events'))
+
+@app.route("/event/<int:id>/approved", methods=['GET', 'POST'])
+@login_required
+def approveevent(id):
+    event = Events.query.filter_by(id=id).first()
+    event.status = 'Approved'
+    db.session.commit()
+    return redirect(url_for('profile'))
+
+@app.route("/event/<int:id>/rejected", methods=['POST'])
+@login_required
+def rejectedevent(id):
+    event = Events.query.filter_by(id=id).first()
+    event.status = 'Rejected'
+    db.session.commit()
+    return redirect(url_for('profile'))    
 
 @login_manager.user_loader
 def load_user(acc_id):

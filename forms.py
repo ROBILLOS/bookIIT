@@ -56,7 +56,7 @@ class AddEvent(FlaskForm):
 	description = StringField('Description',
 							validators=[DataRequired()])
 	venue = SelectField('Venue',
-							validators=[DataRequired()], choices=[('2', 'Gymnasium'), ('3','ICT 3H')])
+							validators=[DataRequired()], choices=[('2', 'Gymnasium'), ('3','ICT 3H'), ('4', 'HUBPORT')])
 	tags = StringField('Tags',
 							validators=[Optional()])
 	partnum = IntegerField('Participants',

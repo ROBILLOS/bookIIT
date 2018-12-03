@@ -43,6 +43,7 @@
       <div class="container">
         <div class="row">
             {% for event in events %}
+            {% if event.status == 'Pending'%}
             <ul class="event-list">
                 <li>
                     <time datetime="2014-07-20">
@@ -54,18 +55,27 @@
                     <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" /> <!--  insert image here  -->
                     <div class="info">
                         <h2 class="title">{{ event.title }}</h2> <!--  insert title here  -->
-                        <p class="desc">Organizer</p> <!--  insert catchphrase  -->
-                        <p class="desc">{{ event.description }}</p> <!--  insert catchphrase  -->
+                        {% for user in users %}
+                        {% if user.id == event.organizer %}
+                        
+                        <p class="desc">{{ user.fname + ' ' + user.lname }}</p>
+                        {%endif%}{%endfor%}
+                        <p class="desc">{{ event.description }}</p> <!--  inert catchphrase  -->
                         <p class="stat">{{ event.status }}</p> <!--  insert catchphrase  -->
                     </div>
                     <div class="social">
                         <ul>
+                            <form action="/event/{{event.id}}/approved" method="post">
                             <button class="approved"><img src="{{ url_for('static', filename='images/approved.png') }}" width="50" height="50"></button>
+                            </form>
+                            <form action="/event/{{event.id}}/rejected" method="post">
                             <button class="rejected"><img src="{{ url_for('static', filename='images/rejected.png') }}" width="50" height="50"></button>
+                            </form>
                         </ul>
                     </div>
                 </li>
             </ul>
+            {%endif %}
             {% endfor %}
         </div>
       </div>

@@ -96,6 +96,7 @@
           <div class="col-md-9">
               <div class="profile-content">
                   {%  for event in events %}
+                  {% if event.status == 'Approved' %}
                   <div class="card" style="width: 18rem;">
                       <img class="card-img-top" src="{{ url_for('static', filename='images/obama.jpg') }}" alt="Card image cap">
                       <div class="card-body">
@@ -105,6 +106,7 @@
                         <a class="btn2 btn2-primary" data-toggle="modal" data-target="#event{{ event.event_id }}">More Info</a>
                       </div>
                   </div>
+                  {% endif %}
                   {% endfor %}
               </div>
           </div>

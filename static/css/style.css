@@ -349,3 +349,8 @@ h1, h2, h3, h4, h5 {
   .modal-body2 {
     color: #000000;
   }
+
+  .modal-dialog {
+    max-width: 500px;
+    margin: 150px auto;
+  }

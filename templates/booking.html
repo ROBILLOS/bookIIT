@@ -28,6 +28,16 @@
 <body>
 	<div class="booking-form">
 		<form method="post" action="/addevent">
+			{{ form.csrf_token }}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
 			<div class="form-header">
 				<h2>Book an Event</h2>
 			</div>

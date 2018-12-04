@@ -56,7 +56,7 @@ class AddEvent(FlaskForm):
 	description = StringField('Description',
 							validators=[DataRequired()])
 	venue = SelectField('Venue',
-							validators=[DataRequired()], choices=[('2', 'Gymnasium'), ('3','ICT 3H'), ('4', 'HUBPORT')])
+							validators=[DataRequired()], choices=[('1', 'Gymnasium'), ('3','ICT 3H'), ('4', 'HUBPORT')])
 	tags = StringField('Tags',
 							validators=[Optional()])
 	partnum = IntegerField('Participants',
@@ -68,3 +68,11 @@ class AddEvent(FlaskForm):
 	end = TimeField('End Time',
 							validators=[DataRequired()])
 	submit = SubmitField('Request Event')
+
+class EventReg(FlaskForm):
+	regid = StringField('Title',
+							validators=[DataRequired()])
+	eventid = IntegerField('Event ID',
+							validators=[DataRequired()])
+	userid = IntegerField('User ID',
+							validators=[DataRequired()])

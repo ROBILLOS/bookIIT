@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Venue - Add</title>
+    <title>Manage Events</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -42,26 +42,25 @@
     <section class="probootstrap-section">
       <div class="container">
         <div class="row">
-            {% for event in events %}
-            {% if event.status == 'Pending'%}
+            {% for event in events|sort(attribute='date') %}
+            <!-- {% if event.status == 'Pending'%} -->
             <ul class="event-list">
                 <li>
                     <time datetime="2014-07-20">
-{#                        <span class="year">{{ event.date.strftime("%Y") }}</span> <!--  insert year here  -->#}
-                        <span class="day">{{ event.date.strftime("%d") }}</span> <!--  insert day here  -->
-                        <span class="month">{{ event.date.strftime("%B") }}</span> <!--  insert month here  -->
-                        <span class="time">{{ event.start.strftime("%I:%M") }} - {{ event.end.strftime("%I:%M") }}, {{event.date.strftime("%Y") }}</span> <!-- insert time  -->
+                        <span class="year">{{ event.date.strftime("%Y") }}</span>
+                        <span class="day">{{ event.date.strftime("%d") }}</span>
+                        <span class="month">{{ event.date.strftime("%B") }}</span>
+                        <span class="time">{{ event.start.strftime("%I:%M") }} - {{ event.end.strftime("%I:%M") }}, {{event.date.strftime("%Y") }}</span>
                     </time>
-                    <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" /> <!--  insert image here  -->
+                    <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
                     <div class="info">
-                        <h2 class="title">{{ event.title }}</h2> <!--  insert title here  -->
+                        <h2 class="title">{{ event.title }}</h2>
                         {% for user in users %}
                         {% if user.id == event.organizer %}
-                        
                         <p class="desc">{{ user.fname + ' ' + user.lname }}</p>
                         {%endif%}{%endfor%}
-                        <p class="desc">{{ event.description }}</p> <!--  inert catchphrase  -->
-                        <p class="stat">{{ event.status }}</p> <!--  insert catchphrase  -->
+                        <p class="desc">{{ event.description }}</p>
+                        <p class="stat">{{ event.status }}</p>
                     </div>
                     <div class="social">
                         <ul>

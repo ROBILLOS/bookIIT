@@ -155,7 +155,7 @@ def addevent():
 @login_required
 def event():
     venues = Venue.query.all()
-    events = Events.query.all()
+    events = Events.query.filter_by(status='Pending')
     users = User.query.all()
     return render_template('events.html', venues=venues, events=events, users=users)
 

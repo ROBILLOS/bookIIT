@@ -1,9 +1,12 @@
-import flask
+import flask, time
 from flask import request, flash, url_for, redirect, render_template
 from forms import Registration, LogIn,AddVenue, AddEvent
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
 from Models import Acc, User, Venue, Events, College, Admin_acc, COLLEGENAMES
+from time import gmtime, strftime
+
+strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -151,13 +154,36 @@ def addevent():
         return redirect(url_for('profile'))
     return render_template('booking.html', form=form)
 
-@app.route("/event", methods=['GET'])
+disps = [ 
+        { 'month':'Jan', 'color':'#781c2e', 'id':'January'},
+        { 'month':'Feb', 'color':'#9966cc', 'id':'February'},
+        { 'month':'March', 'color':'#7fffd4', 'id':'March'},
+        { 'month':'April', 'color':'#cbe3f0', 'id':'April'},
+        { 'month':'May', 'color':'#50c878', 'id':'May'},
+        { 'month':'June', 'color':'#eae0c8', 'id':'June'},
+        { 'month':'July', 'color':'#e0115f', 'id':'July'},
+        { 'month':'Aug', 'color':'#e6e200', 'id':'August'},
+        { 'month':'Sept', 'color':'#0f52ba', 'id':'September'},
+        { 'month':'Oct', 'color':'#b297a0', 'id':'October'},
+        { 'month':'Nov', 'color':'#ffc87c', 'id':'November'},
+        { 'month':'Dec', 'color':'#40e0d0', 'id':'December'},
+
+]
+
+@app.route("/event/manage", methods=['GET'])
 @login_required
 def event():
     venues = Venue.query.all()
     events = Events.query.filter_by(status='Pending')
     users = User.query.all()
     return render_template('events.html', venues=venues, events=events, users=users)
+
+@app.route("/event", methods=['GET'])
+def dispevent():
+    venues = Venue.query.all()
+    events = Events.query.filter_by(status='Pending')
+    users = User.query.all()
+    return render_template('dispevent.html', venues=venues, events=events, users=users, disps=disps)
 
 @app.route("/editevent/<int:id>", methods=['GET','POST'])
 @login_required

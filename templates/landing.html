@@ -4,7 +4,8 @@
     <title>BookIIT - Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+ 
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/msulogo.png') }}"/>   
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
@@ -22,7 +23,7 @@
 
         <div class="collapse navbar-collapse" id="probootstrap-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
+            <li class="nav-item"><a href="/event" class="nav-link" data-toggle="tooltip" title="Event Calendar"><img src="{{ url_for('static', filename='images/calendar.png') }}"></a></li>
             <div class="dropdown">
                 <button class="dropbtn"><img src="{{ url_for('static', filename='images/user.png') }}"></button>
                 <div class="dropdown-content">
@@ -52,7 +53,7 @@
             {% endwith %}
             <div class="row">
               <div class="col-md-6">
-                <a class="probootstrap-img-item" href="/event"><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>
+                <a class="probootstrap-img-item" href="/event/manage"><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>
                 <div class="texttest">
                   <p>Manage Events</p>
                 </div>

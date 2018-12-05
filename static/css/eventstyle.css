@@ -1,10 +1,3 @@
-@import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic");
-    @import url("//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
-    /*body {*/
-		/*padding: 60px 0px;*/
-		/*background-color: rgb(220, 220, 220);*/
-	/*}*/
-
     .event-list {
 		width: 100%;
 		list-style: none;
@@ -23,7 +16,7 @@
 		display: inline-block;
 		width: 100%;
 		color: rgb(255, 255, 255);
-		background-color: rgb(197, 44, 102);
+		background-color: rgb(82, 33, 51);
 		padding: 5px;
 		text-align: center;
 		text-transform: uppercase;
@@ -38,12 +31,13 @@
 	.event-list > li > time > .day {
 		display: block;
 		font-size: 56pt;
-		font-weight: 100;
+		font-weight: bold;
 		line-height: 1;
+		padding-top: 10px;
 	}
 	.event-list > li time > .month {
 		display: block;
-		font-size: 16pt;
+		font-size: 12pt;
 		font-weight: 900;
 		line-height: 1;
 	}
@@ -63,6 +57,7 @@
 		font-size: 13pt;
 		font-weight: 300;
 		margin: 0px;
+		color:#000000;
 	}
 	.event-list > li > .info > .stat {
 		font-size: 13pt;
@@ -190,3 +185,46 @@
 			padding: 10px 0px 9px;
 		}
 	}
+
+
+////////////////////////////////
+
+
+
+/* Set height of body and the document to 100% to enable "full page tabs" */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #fff;
+  color: black;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 11px;
+  font-size: 20px;
+  font-weight: bolder;
+  width: 95px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transition: all 0.35s;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 30px 20px;
+  height: 100%;
+  width: 1140px;
+  transition: all 0.35s	
+}

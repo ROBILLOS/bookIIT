@@ -42,12 +42,26 @@ def profile():
     events = Events.query.all()
     return render_template('profile.html', events=events)
 
-@app.route("/venue", methods=['GET'])
+@app.route("/venue/manage", methods=['GET'])
 @login_required
 def venue():
     venues = Venue.query.all()
     colleges = College.query.all()
     return render_template('venue.html', venues=venues, colleges=colleges)
+
+@app.route("/venue", methods=['GET'])
+@login_required
+def dispvenue():
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('dispvenue.html', venues=venues, colleges=colleges)
+
+@app.route("/venue-main", methods=['GET'])
+@login_required
+def mainvenue():
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('venuemain.html', venues=venues, colleges=colleges)
 
 @app.route("/logout")
 @login_required

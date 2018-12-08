@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5 {
   font-size: 14px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  font-weight: bold;
+  /*font-weight: bold;*/
   cursor: pointer; }
   .btn:hover, .btn:active, .btn:focus {
     outline: none;

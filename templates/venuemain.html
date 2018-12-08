@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>BookIIT - Admin</title>
+    <title>Venues</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dispbox.css') }}">
   </head>
 
   <body>
@@ -52,23 +53,38 @@
                 {% endif %}
             {% endwith %}
             <div class="row">
+
+              {% for college in colleges %}
               <div class="col-md-6">
                 <a class="probootstrap-img-item" href="/event/manage"><div style="background-image: url(../static/images/obama.jpg); background-position: center;"></div></a>
                 <div class="texttest">
-                  <p>Manage Events</p>
+                  <p>{{ college.abb }}</p>
                 </div>
               </div>
-              <div class="col-md-6">
-                <a class="probootstrap-img-item" href="/venue/manage"><div style="background-image: url(../static/images/office.jpg); background-position: center;"></div></a>
-                <div class="texttest">
-                  <p>Manage Venues</p>
-                </div>
-              </div>
+             {% endfor %}
+            
             </div>
           </div>
         </div>
       </div>
     </section>
+
+
+
+    <!--- LOG IN !--->
+ <div id="MyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">POPPOY</h4>
+      </div>
+      <div class="modal-body">
+              <p>POOPY POO</p>
+      </div>
+    </div>
 
     
 

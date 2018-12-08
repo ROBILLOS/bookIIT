@@ -97,10 +97,12 @@ class College(db.Model):
     __tablename__ = "college"
     id = db.Column('college_id', db.Integer , primary_key=True)
     name = db.Column('college_name', db.String())
+    abb = db.Column('college_abb', db.String())
 
-    def __init__(self, name):
+    def __init__(self, name, abb):
         self.id = id
         self.name = name
+        self.abb = abb
 
 class Events(db.Model):
     __tablename__ = "events"

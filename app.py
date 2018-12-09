@@ -39,8 +39,9 @@ def landing():
 @app.route("/profile")
 @login_required
 def profile():
+    image_file = url_for('static', filename='images/profile_pics/' + current_user.image_file)
     events = Events.query.all()
-    return render_template('profile.html', events=events)
+    return render_template('profile.html', events=events, image_file=image_file)
 
 @app.route("/venue/manage", methods=['GET'])
 @login_required

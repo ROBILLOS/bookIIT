@@ -20,4 +20,4 @@ function openPage(pageName, elmnt, color) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("{{ disp.month == 'Jan' }}").click();
+document.getElementsByClassName('tablink')[0].click();

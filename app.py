@@ -1,6 +1,6 @@
 import flask, time
 from flask import request, flash, url_for, redirect, render_template
-from forms import Registration, LogIn,AddVenue, AddEvent
+from forms import Registration, LogIn, AddVenue, AddEvent
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
 from Models import Acc, User, Venue, Events, College, Admin_acc, COLLEGENAMES
@@ -36,9 +36,27 @@ def login():
 def landing():
     return render_template('landing.html')
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET','POST'])
 @login_required
 def profile():
+    # user = User.query.filter_by(id=id).first()
+    # acc = Acc.query.filter_by(id=id).first()
+    # form = UpdateUser()
+    # if form.validate_on_submit():
+    #     user.fname = form.fname.data
+    #     user.lname = form.lname.data
+    #     acc.username = form.username.data
+    #     acc.email = form.email.data
+    #     user.contact = form.contact.data
+    #     db.session.commit()
+    #     flash('Your account has been updated!','success')
+    #     return redirect(url_for('profile'))
+    # elif request.method == 'GET':
+    #     form.fname.data = user.fname
+    #     form.lname.data = user.lname
+    #     form.username.data = acc.username
+    #     form.email.data = acc.email
+    #     form.contact.data = user.contact
     image_file = url_for('static', filename='images/profile_pics/' + current_user.image_file)
     events = Events.query.all()
     return render_template('profile.html', events=events, image_file=image_file)

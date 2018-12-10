@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 from wtforms_components import TimeField 
@@ -29,6 +30,30 @@ class Registration(FlaskForm):
 	#if user:
 		#raise ValidationError('That e-mail is already in use! Please use a different one.')
 
+# class UpdateUser(FlaskForm):
+# 	fname = StringField('First Name',
+# 							validators=[InputRequired(), Length(min=2, max=20)])
+# 	lname = StringField('Last Name',
+# 							validators=[InputRequired(), Length(min=2, max=20)])
+# 	username = StringField('Username',
+# 							validators=[InputRequired(), Length(min=5, max=16)])
+# 	email = StringField('Email',
+# 							validators=[InputRequired(), Email()])
+# 	contact = IntegerField('Contact', 
+# 							validators=[Optional()])
+# 	submit = SubmitField('Update')
+
+# 	def validate_username(self, username):
+# 		if username.data != current_user.username:
+# 			user = User.query.filter_by(username=username.data).first()
+# 			if user:
+# 				raise ValidationError('Username already exists. Please choose another.')
+
+# 	def validate_email(self,email):
+# 		if email.data != current_user.email:
+# 			user = User.query.filter_by(username=email.data).first()
+# 			if user:
+# 				raise ValidationError('Email already exists. Please choose another.')
 
 class LogIn(FlaskForm):
 	email = StringField('Email',

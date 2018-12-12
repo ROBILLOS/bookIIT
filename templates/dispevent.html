@@ -57,14 +57,18 @@
             {% endfor %}
             {% for disp in disps %}
             <div id="{{ disp.month }}" class="tabcontent">
-              {% for event in events|sort(attribute='date') %}
-              {% if disp.id == event.date.strftime("%B") %}
+              {% for event in events|sort(attribute='date_s') %}
+              {% if disp.id == event.date_s.strftime("%B") %}
             
             
             <ul class="event-list">
                 <li>
                     <time datetime="2014-07-20">
-                        <span class="day">{{ event.date.strftime("%d") }}</span>
+                        {% if event.date_e is none %}
+                            <span class="day">{{ event.date_s.strftime("%d") }}</span>
+                        {% elif event.date_e is not none %}
+                            <span class="days">{{ event.date_s.strftime("%d") }} - {{ event.date_e.strftime("%d") }}</span>
+                        {% endif %}
                         <span class="month">{{ event.start.strftime("%H:%M") }} - {{ event.end.strftime("%H:%M") }}</span>
                     </time>
                     <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />

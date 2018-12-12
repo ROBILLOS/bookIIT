@@ -57,7 +57,7 @@
               {% for venue in venues %}
               <div class="col-md-4 col-sm-6" style="padding-top: 5px; padding-bottom: 15px;  ">
                     <div class="box8">
-                        <img src="http://bestjquery.com/tutorial/hover-effect/demo148/images/img-1.jpg">
+                        <img src="{{ url_for('static', filename='images/upload/'+ venue.image_file )}}">
                         <h3 class="title">{{ venue.name }}</h3>
                         <div class="box-content">
                             <ul class="icon">

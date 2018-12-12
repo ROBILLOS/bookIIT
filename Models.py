@@ -1,19 +1,6 @@
 
 from config import db
 
-COLLEGENAMES = {
-    'MSU-IIT': 1,
-    'College of Engineering': 2,
-    'College of Science and Mathematics': 3,
-    'College of Education': 4,
-    'College of Arts and Social Science': 5,
-    'College of Business Administration and Accountancy': 6,
-    'College of Nursing': 7,
-    'School of Computer Studies': 8,
-    'Integrated Developmental School': 9,
-    'PRISM': 10
-}
-
 class Acc(db.Model):
     __tablename__ = "account"
     id = db.Column('acc_id', db.Integer , primary_key=True)
@@ -83,13 +70,15 @@ class Venue(db.Model):
     capacity = db.Column('capacity', db.Integer())
     rate = db.Column('rate', db.Integer)
     equipment = db.Column('equipment', db.String())
+    image_file = db.Column('venue_img', db.String(), nullable=False)
 
-    def __init__(self, name, college, capacity, rate, equipment):
+    def __init__(self, name, college, capacity, rate, equipment, image_file):
         self.name = name
-        self.college = COLLEGENAMES.get(college, 1)
+        self.college = college
         self.capacity = capacity
         self.rate = rate
         self.equipment = equipment
+        self.image_file = image_file
 
     def get_id(self):
         return unicode(self.id)
@@ -99,6 +88,7 @@ class College(db.Model):
     id = db.Column('college_id', db.Integer , primary_key=True)
     name = db.Column('college_name', db.String())
     abb = db.Column('college_abb', db.String())
+    img = db.Column('college_img', db.String(), nullable=False)
 
     def __init__(self, name, abb):
         self.id = id
@@ -113,23 +103,27 @@ class Events(db.Model):
     title = db.Column('event_name', db.String())
     description = db.Column('event_desc', db.String())
     tags = db.Column('event_tags', db.String())
-    date = db.Column('event_date', db.Date())
+    date_s = db.Column('event_date', db.Date())
+    date_e = db.Column('event_date2', db.Date())
     start = db.Column('event_time_s', db.Time())
     end = db.Column('event_time_e', db.Time())
     partnum = db.Column('expected_participants', db.Integer())
     status = db.Column('event_status', db.String())
+    image_file = db.Column('event_img', db.String(), nullable=False)
 
-    def __init__(self, organizer, venue, title, description, tags, date, start, end, partnum, status ):
+    def __init__(self, organizer, venue, title, description, tags, date_s, date_e, start, end, partnum, status, image_file ):
         self.organizer = organizer
         self.title = title
         self.description = description
         self.venue = venue
         self.tags = tags
-        self.date = date
+        self.date_s = date_s
+        self.date_e = date_e
         self.start = start
         self.end = end
         self.partnum = partnum
         self.status = status
+        self.image_file = image_file
 
 
 

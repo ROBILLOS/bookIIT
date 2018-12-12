@@ -35,6 +35,14 @@
 		line-height: 1;
 		padding-top: 10px;
 	}
+	.event-list > li > time > .days {
+		display: block;
+		font-size: 27pt;
+		font-weight: bold;
+		line-height: 1;
+		padding-top: 30px;
+		padding-bottom: 20px;
+	}
 	.event-list > li time > .month {
 		display: block;
 		font-size: 12pt;
@@ -112,7 +120,7 @@
 		color: rgb(255, 255, 255) !important;
 		background-color: rgb(75, 110, 168) !important;
 	}
-	rejected:hover a {
+	.rejected:hover a {
 		color: rgb(255, 255, 255) !important;
 		background-color: rgb(79, 213, 248) !important;
 	}

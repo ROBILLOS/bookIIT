@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField, FileField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
 from wtforms_components import TimeField 
 import config
@@ -66,14 +67,17 @@ class AddVenue(FlaskForm):
 	name = StringField('Venue Name',
 							validators=[DataRequired()])
 	college = SelectField('College', id='college_id',
-							validators=[DataRequired()], choices=[('MSU-IIT', 'MSU-IIT'), ('College of Engineering and Technology', 'College of Engineering and Technology'), ('College of Science and Mathematics', 'College of Science and Mathematics'), ('College of Education', 'College of Education'), ('College of Arts and Social Sciences', 'College of Arts and Social Sciences'), ('College of Business Administration and Accountancy', 'College of Business Administration and Accountancy'), ('College of Nursing', 'College of Nursing'), ('School of Computer Studies', 'School of Computer Studies'), ('Integrated Developmental School', 'Integrated Developmental School'), ('Premier Research Institute of Science and Mathematics', 'Premier Research Institute of Science and Mathematics')])
+							validators=[DataRequired()], choices=[('1', 'MSU-IIT'), ('2', 'College of Engineering and Technology'), ('3', 'College of Science and Mathematics'), ('4', 'College of Education'), ('5', 'College of Arts and Social Sciences'), ('6', 'College of Business Administration and Accountancy'), ('7', 'College of Nursing'), ('8', 'School of Computer Studies'), ('9', 'Integrated Developmental School'), ('10', 'Premier Research Institute of Science and Mathematics')])
 	capacity = IntegerField('Capacity',
 							validators=[Optional()])
 	rate = IntegerField('Rate',
 							validators=[Optional()])
 	equipment = TextAreaField('Equipment',
 							validators=[Optional()])
+	image_file = FileField('Update Picture', 
+							validators=[FileAllowed(['jpg', 'png'])])
 	submit = SubmitField('Add Venue')
+
 
 class AddEvent(FlaskForm):
 	title = StringField('Title',
@@ -86,12 +90,16 @@ class AddEvent(FlaskForm):
 							validators=[Optional()])
 	partnum = IntegerField('Participants',
 							validators=[Optional()])
-	date = DateField('Date', 
+	date_s = DateField('Date', 
 							validators=[DataRequired()])
+	date_e = DateField('Date', 
+							validators=[Optional()])
 	start = TimeField('Start Time',
 							validators=[DataRequired()])
 	end = TimeField('End Time',
 							validators=[DataRequired()])
+	image_file = FileField('Event Poster', 
+							validators=[FileAllowed(['jpg', 'png'])])
 	submit = SubmitField('Request Event')
 
 class EventReg(FlaskForm):

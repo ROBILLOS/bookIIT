@@ -1,9 +1,10 @@
-import flask, time
+import flask, time, secrets, os
+from PIL import Image
 from flask import request, flash, url_for, redirect, render_template
 from forms import Registration, LogIn, AddVenue, AddEvent
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 from config import app, db
-from Models import Acc, User, Venue, Events, College, Admin_acc, COLLEGENAMES
+from Models import Acc, User, Venue, Events, College, Admin_acc
 from time import gmtime, strftime
 
 strftime("%Y-%m-%d %H:%M:%S", gmtime())
@@ -12,6 +13,15 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = "You have logged out."
+
+def save_picture(form_picture):
+    random_hex=secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images/upload', picture_fn)
+    form_picture.save(picture_path)
+
+    return picture_fn
 
 @app.route("/")
 
@@ -57,30 +67,9 @@ def profile():
     #     form.username.data = acc.username
     #     form.email.data = acc.email
     #     form.contact.data = user.contact
-    image_file = url_for('static', filename='images/profile_pics/' + current_user.image_file)
+    image_file = url_for('static', filename='images/upload/' + current_user.image_file)
     events = Events.query.all()
     return render_template('profile.html', events=events, image_file=image_file)
-
-@app.route("/venue/manage", methods=['GET'])
-@login_required
-def venue():
-    venues = Venue.query.all()
-    colleges = College.query.all()
-    return render_template('venue.html', venues=venues, colleges=colleges)
-
-@app.route("/venue", methods=['GET'])
-@login_required
-def dispvenue():
-    venues = Venue.query.all()
-    colleges = College.query.all()
-    return render_template('dispvenue.html', venues=venues, colleges=colleges)
-
-@app.route("/venue-main", methods=['GET'])
-@login_required
-def mainvenue():
-    venues = Venue.query.all()
-    colleges = College.query.all()
-    return render_template('venuemain.html', venues=venues, colleges=colleges)
 
 @app.route("/logout")
 @login_required
@@ -129,13 +118,39 @@ def login2():
         flash ('Invalid email or password.', 'error')
     return render_template('login.html', form=form)
 
+#//////////////////////////VENUES
+
+@app.route("/venue/manage", methods=['GET'])
+@login_required
+def venue():
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('venue.html', venues=venues, colleges=colleges)
+
+@app.route("/venue", methods=['GET'])
+@login_required
+def dispvenue():
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('dispvenue.html', venues=venues, colleges=colleges)
+
+@app.route("/venue-main", methods=['GET'])
+@login_required
+def mainvenue():
+    venues = Venue.query.all()
+    colleges = College.query.all()
+    return render_template('venuemain.html', venues=venues, colleges=colleges)
+
 @app.route("/addvenue", methods=['GET', 'POST'])
 @login_required
 def addvenue():
+    image_file = url_for('static', filename='images/upload/' + Venue.image_file)
     form = AddVenue()
     if form.validate_on_submit():
+        if form.image_file.data:
+            picture_file = save_picture(form.image_file.data)
         #Venues are now all stored in the venues table. They only differ with college id. reference the initialize college script for college ids.
-        newvenue = Venue(name=form.name.data, college=form.college.data, capacity=form.capacity.data, rate=form.rate.data, equipment=form.equipment.data)
+        newvenue = Venue(name=form.name.data, college=form.college.data, capacity=form.capacity.data, rate=form.rate.data, equipment=form.equipment.data, image_file=picture_file)
         #Note that college will accept String values, specifically only those specified in the dictionary added in Models.py
         #If string doesn't match, by default, it will take on the value of 1/ 'MSU-IIT'.
         #Those string values are converted to corresponding id numbers of those colleges in the db.
@@ -143,12 +158,13 @@ def addvenue():
         db.session.commit()
         flash('Venue created.')
         return redirect(url_for('venue'))
-    return render_template('addvenue.html', form=form)
+    return render_template('addvenue.html', form=form, image_file=image_file)
 
 @app.route("/editvenue/<int:id>", methods=['GET', 'POST'])
 @login_required
 def editvenue(id):
     venue = Venue.query.filter_by(id=id).first()
+    image_file = url_for('static', filename='images/upload/' + Venue.image_file)
     form = AddVenue()
     if form.validate_on_submit():
         venue.name = form.name.data
@@ -159,7 +175,7 @@ def editvenue(id):
         db.session.commit()
         flash('Venue created.')
         return redirect(url_for('venue'))
-    return render_template('editvenue.html', form=form, venue=venue)
+    return render_template('editvenue.html', form=form, venue=venue, image_file=image_file)
 
 @app.route("/deletevenue/<int:id>", methods=['GET','POST'])
 @login_required
@@ -173,19 +189,24 @@ def deletevenue(id):
         flash('No such event exists!')
     return redirect(url_for('venue'))
 
+#///////////////////////////// EVENT
+
+
+
 @app.route("/addevent", methods=['GET', 'POST'])
 @login_required
 def addevent():
+    image_file = url_for('static', filename='images/upload/' + Venue.image_file)
     form = AddEvent()
-
-    print form.validate_on_submit()
     if form.validate_on_submit():
-        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date=form.date.data, start=form.start.data, end=form.end.data, status='Pending')
+        if form.image_file.data:
+            picture_file = save_picture(form.image_file.data)
+        newevent = Events(organizer=current_user.id, title=form.title.data, description=form.description.data, venue=form.venue.data, tags=form.tags.data, partnum=form.partnum.data, date_s=form.date_s.data, date_e=form.date_e.data, start=form.start.data, end=form.end.data, status='Pending', image_file=picture_file)
         db.session.add(newevent)
         db.session.commit()
         flash('Event created. An administrator will approve it later.')
         return redirect(url_for('profile'))
-    return render_template('booking.html', form=form)
+    return render_template('booking.html', form=form, image_file=image_file)
 
 disps = [ 
         { 'month':'Jan', 'color':'#781c2e', 'id':'January'},
@@ -223,6 +244,7 @@ def dispevent():
 def editevent(id):
     event = Events.query.filter_by(id=id).first()
     venue = Venue.query.all()
+    image_file = url_for('static', filename='images/upload/' + Event.image_file)
     form = AddVenue() #EditVenue()
 
     if form.validate_on_submit():
@@ -235,7 +257,7 @@ def editevent(id):
         event.participantnum=form.participantnum.data
         db.session.commit()
         return redirect(url_for('events'))
-    return render_template('editevent.html', form=form, event=event, venue=venue)
+    return render_template('editevent.html', form=form, event=event, venue=venue, image_file=image_file)
 
 @app.route("/deleteevent/<int:id>", methods=['GET','POST'])
 @login_required

@@ -43,15 +43,20 @@
     <section class="probootstrap-section">
       <div class="container">
         <div class="row">
-            {% for event in events|sort(attribute='date') %}
+            {% for event in events|sort(attribute='date_s') %}
             <!-- {% if event.status == 'Pending'%} -->
             <ul class="event-list">
                 <li>
                     <time datetime="2014-07-20">
-                        <span class="day">{{ event.date.strftime("%d") }}</span>
-                        <span class="month">{{ event.start.strftime("%I:%M") }} - {{ event.end.strftime("%I:%M") }}</span>
+                        <span class="month">{{ event.date_s.strftime("%b") }} {{ event.date_s.strftime("%Y") }}</span>
+                        {% if event.date_e is none %}
+                        <span class="day">{{ event.date_s.strftime("%d") }}</span>
+                        {% elif event.date_e is not none %}
+                        <span class="days">{{ event.date_s.strftime("%d") }} - {{ event.date_e.strftime("%d") }}</span>
+                        {% endif %}
+                        <span class="time">{{ event.start.strftime("%I:%M") }} - {{ event.end.strftime("%I:%M") }}</span>
                     </time>
-                    <img alt="alttitle" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
+                    <img src="{{ url_for('static', filename='images/upload/'+ event.image_file )}}">
                     <div class="info">
                         <h2 class="title">{{ event.title }}</h2>
                         {% for user in users %}

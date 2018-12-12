@@ -28,7 +28,7 @@
 
 <body>
 	<div class="booking-form">
-		<form method="post" action="/addevent">
+		<form method="post" action="/addevent" enctype="multipart/form-data">
 			{{ form.csrf_token }}
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -67,23 +67,19 @@
 				<!-- <input class="form-control" type="tel" placeholder="Tags"> -->
 				<span class="form-label">Number of Participants</span>
 			</div>
-			<!-- <div class="form-group">
-				<select class="form-control" required>
-					<option value="" label="&nbsp;" selected hidden></option>
-					<option>30</option>
-					<option>50</option>
-					<option>100</option>
-					<option>250</option>
-					<option>500+</option>
-				</select>
-				<span class="select-arrow"></span>
-				<span class="form-label">Expected No. of Participants</span>
-			</div> -->
+			
             <div class="form-group">
-				{{ form.date(class="form-control", type="date", placeholder="Date") }}
+				{{ form.date_s(class="form-control", type="date", placeholder="Start Date") }}
                 <!-- <input class="form-control" type="date" required> -->
-                <span class="form-label">Date</span>
-            </div>
+                <span class="form-label">Start Date</span>
+            </div>	
+
+            <div class="form-group">
+				{{ form.date_e(class="form-control", type="date", placeholder="Start Date") }}
+                <!-- <input class="form-control" type="date" required> -->
+                <span class="form-label">End Date (Optional)</span>
+            </div>	
+
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -100,6 +96,16 @@
 					</div>
 				</div>
 			</div>
+
+			<div class ="col-md-6">
+                  {{ form.image_file.label() }}
+                  {{ form.image_file(class="form-control pb_height-50 reverse", placeholder="Add Photo") }}
+                        {% if form.image_file.errors %}
+                          {% for error in form.image_file.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                          {% endfor %}
+                        {% endif %}
+              </div>
 
 			<div class="form-btn">
 				 {{ form.submit(class="submit-btn")}}

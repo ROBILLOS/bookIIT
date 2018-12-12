@@ -44,7 +44,7 @@
         <div class="container-login100-2">
           <div class="wrap-venue100">
 
-            <form class="login100-form validate-form" action="/addvenue" method="POST">
+            <form class="login100-form validate-form" action="/addvenue" method="POST" enctype="multipart/form-data">
                 {{ form.csrf_token }}
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -89,6 +89,7 @@
                   {{ form.rate(class="form-control pb_height-50 reverse", placeholder="Rate (Php/hr)" ) }}
                 </div>
               </div>
+
               
               <div class="row">
                 <span class="venue-txt">
@@ -101,8 +102,18 @@
                   {{ form.equipment(class="form-control pb_height-50 reverse" , placeholder="Equipments" ) }}
                 </div>
               </div>
-              
-             
+            
+             <div class="row">
+             <div class="venueform-wrap-2">
+                  {{ form.image_file.label() }}
+                  {{ form.image_file(class="form-control pb_height-50 reverse", placeholder="Add Photo") }}
+                        {% if form.image_file.errors %}
+                          {% for error in form.image_file.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                          {% endfor %}
+                        {% endif %}
+              </div>
+              </div>
                 <!-- <div class="row">
                   <span class="txt1">
                       Add Image

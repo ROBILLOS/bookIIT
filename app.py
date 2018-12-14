@@ -206,7 +206,7 @@ def addevent():
         db.session.commit()
         flash('Event created. An administrator will approve it later.')
         return redirect(url_for('profile'))
-    return render_template('booking.html', form=form, image_file=image_file)
+    return render_template('book.html', form=form, image_file=image_file)
 
 disps = [ 
         { 'month':'Jan', 'color':'#781c2e', 'id':'January'},

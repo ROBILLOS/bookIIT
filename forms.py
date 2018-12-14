@@ -1,9 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, DateField, TextAreaField, DateTimeField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional, InputRequired
-from wtforms_components import TimeField 
-import config
+from wtforms_components import TimeField
+import config, Models
 
+import wtforms_sqlalchemy.fields as f
+def get_pk_from_identity(obj):
+	cls, key = f.identity_key(instance=obj)[:2]
+	return ':'.join(f.text_type(x) for x in key)
+f.get_pk_from_identity = get_pk_from_identity
 
 class Registration(FlaskForm):
 	fname = StringField('First Name',
@@ -18,17 +24,6 @@ class Registration(FlaskForm):
 							validators=[InputRequired(), EqualTo('confirm_password', message='Passwords do not match,')])
 	confirm_password = PasswordField('Confirm Password',
 							validators=[InputRequired()])
-
-#def validate_username(self, username):
-	#user = User.query.filter_by(username=username.data).first()
-	#if user:
-		#raise ValidationError('That username already exists! Please use a different one.')
-
-#def validate_email(self, email):
-	#user = User.query.filter_by(email=email.data).first()
-	#if user:
-		#raise ValidationError('That e-mail is already in use! Please use a different one.')
-
 
 class LogIn(FlaskForm):
 	email = StringField('Email',
@@ -55,24 +50,27 @@ class AddEvent(FlaskForm):
 							validators=[DataRequired()])
 	description = StringField('Description',
 							validators=[DataRequired()])
-	venue = SelectField('Venue',
-							validators=[DataRequired()], choices=[('1', 'Gymnasium'), ('3','ICT 3H'), ('4', 'HUBPORT')])
+	venue = QuerySelectField(query_factory=lambda: Models.Venue.query, allow_blank=False)
 	tags = StringField('Tags',
 							validators=[Optional()])
 	partnum = IntegerField('Participants',
 							validators=[Optional()])
-	date = DateField('Date', 
-							validators=[DataRequired()])
+	datestart = DateField('Start Date',
+						  validators=[DataRequired()])
 	start = TimeField('Start Time',
 							validators=[DataRequired()])
-	end = TimeField('End Time',
-							validators=[DataRequired()])
+	dateend = DateField('End Date',
+						  validators=[DataRequired()])
+	end = DateTimeField('End Time',
+							validators=[DataRequired()],)
 	submit = SubmitField('Request Event')
 
-class EventReg(FlaskForm):
-	regid = StringField('Title',
-							validators=[DataRequired()])
-	eventid = IntegerField('Event ID',
-							validators=[DataRequired()])
-	userid = IntegerField('User ID',
-							validators=[DataRequired()])
+class Participate(FlaskForm):
+	fname = StringField('First Name',
+						validators=[InputRequired(), Length(min=2, max=20)])
+	lname = StringField('Last Name',
+						validators=[InputRequired(), Length(min=2, max=20)])
+	email = StringField('Email',
+						validators=[InputRequired(), Email()])
+	contact = StringField('Contact Number',
+						validators=[InputRequired(), Length(min=2, max=20)])

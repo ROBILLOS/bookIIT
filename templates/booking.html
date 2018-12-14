@@ -67,40 +67,26 @@
 				<!-- <input class="form-control" type="tel" placeholder="Tags"> -->
 				<span class="form-label">Number of Participants</span>
 			</div>
-			<!-- <div class="form-group">
-				<select class="form-control" required>
-					<option value="" label="&nbsp;" selected hidden></option>
-					<option>30</option>
-					<option>50</option>
-					<option>100</option>
-					<option>250</option>
-					<option>500+</option>
-				</select>
-				<span class="select-arrow"></span>
-				<span class="form-label">Expected No. of Participants</span>
-			</div> -->
-            <div class="form-group">
-				{{ form.date(class="form-control", type="date", placeholder="Date") }}
-                <!-- <input class="form-control" type="date" required> -->
-                <span class="form-label">Date</span>
-            </div>
-			<div class="row">
-				<div class="col-md-6">
+                <div class="form-group">
+                    {{ form.start(class="form-control", type="date", placeholder="Start Date") }}
+                    <!-- <input class="form-control" type="time" required> -->
+                    <span class="form-label">Starts From</span>
+                    </div>
 					<div class="form-group">
 						{{ form.start(class="form-control", type="time", placeholder="Start Time") }}
 						<!-- <input class="form-control" type="time" required> -->
-						<span class="form-label">Starts From</span>
+						<span class="form-label">Start Time</span>
 					</div>
-				</div>
-				<div class="col-md-6">
 					<div class="form-group">
-						{{ form.end(class="form-control", type="time", placeholder="End Time" ) }}
+						{{ form.end(class="form-control",type="date", placeholder="End Date") }}
 						<!-- <input class="form-control" type="time" required> -->
 						<span class="form-label">Till</span>
 					</div>
-				</div>
-			</div>
-
+                <div class="form-group">
+                    {{ form.end(class="form-control",type="time", placeholder="End Time") }}
+                    <!-- <input class="form-control" type="time" required> -->
+                    <span class="form-label">End Time</span>
+                </div>
 			<div class="form-btn">
 				 {{ form.submit(class="submit-btn")}}
 			</div>
@@ -126,6 +112,7 @@
 				$field.removeClass('input-not-empty');
 			}
 		}
+
 	</script>
 
 </body>

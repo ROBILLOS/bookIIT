@@ -14,20 +14,37 @@ COLLEGENAMES = {
     'PRISM': 10
 }
 
-class Acc(db.Model):
-    __tablename__ = "account"
+COLLEGEID = {
+    1: 'MSU-IIT',
+    2: 'COE',
+    3: 'CSM:',
+    4: 'CED',
+    5: 'CASS',
+    6: 'CBAA',
+    7: 'CON',
+    8: 'SCS',
+    9: 'IDS',
+    10: 'PRISM'
+}
+
+class User(db.Model):
+    __tablename__ = "user_acc"
     id = db.Column('acc_id', db.Integer , primary_key=True)
     type = db.Column('acc_type', db.Integer)
     username = db.Column('username', db.String(), unique=True, index=True)
     password = db.Column('password', db.String())
     email = db.Column('email', db.String(), unique=True, index=True)
+    fname = db.Column('fname', db.String())
+    lname = db.Column('lname', db.String())
     image_file = db.Column('img', db.String(), nullable=False, default='default.png')
 
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email, fname, lname):
         self.username = username
         self.type = 0;
         self.password = password
         self.email = email
+        self.fname = fname
+        self.lname = lname
 
     def is_authenticated(self):
         return True
@@ -47,32 +64,17 @@ class Acc(db.Model):
     def __repr__(self):
         return '<Acc %r>' % (self.username)
 
-class User(db.Model):
-    __tablename__ = "user_acc"
-    id = db.Column('user_id', db.Integer , primary_key=True)
-    fname = db.Column('fname', db.String())
-    lname = db.Column('lname', db.String())
-    contact = db.Column('contact', db.String())
-
-    def __init__(self, id, fname, lname, contact):
-        self.id = id
-        self.fname = fname
-        self.lname = lname
-        self.contact = contact
-
 class Admin_acc(db.Model):
     __tablename__ = "admin_acc"
-    id = db.Column('admin_id', db.Integer , primary_key=True)
-    college = db.Column('college_id', db.Integer , primary_key=True)
-    fname = db.Column('fname', db.String())
-    lname = db.Column('lname', db.String())
+    id = db.Column('admin_id', db.Integer)
+    faculty_id = db.Column('iit_faculty_id', db.String(), primary_key=True)
+    college = db.Column('college_id', db.Integer)
     contact = db.Column('contact', db.String())
 
-    def __init__(self, id, fname, lname, college, contact):
+    def __init__(self, id, faculty_id, college, contact):
         self.id = id
-        self.fname = fname
-        self.lname = lname
-        self.college = COLLEGENAMES.get(college, 1)
+        self.faculty_id = faculty_id
+        self.college = COLLEGENAMES.get(college)
         self.contact = contact
 
 class Venue(db.Model):
@@ -86,13 +88,16 @@ class Venue(db.Model):
 
     def __init__(self, name, college, capacity, rate, equipment):
         self.name = name
-        self.college = COLLEGENAMES.get(college, 1)
+        self.college = COLLEGENAMES.get(college)
         self.capacity = capacity
         self.rate = rate
         self.equipment = equipment
 
     def get_id(self):
         return unicode(self.id)
+
+    def __repr__(self):
+        return '{} - {}'.format(COLLEGEID.get(self.college), self.name)
 
 class College(db.Model):
     __tablename__ = "college"
@@ -113,13 +118,12 @@ class Events(db.Model):
     title = db.Column('event_name', db.String())
     description = db.Column('event_desc', db.String())
     tags = db.Column('event_tags', db.String())
-    date = db.Column('event_date', db.Date())
-    start = db.Column('event_time_s', db.Time())
-    end = db.Column('event_time_e', db.Time())
-    partnum = db.Column('expected_participants', db.Integer())
+    start = db.Column('event_datetime_start', db.DateTime())
+    end = db.Column('event_datetime_end', db.DateTime())
     status = db.Column('event_status', db.String())
+    admin_comment = db.Column('admin_comment', db.String())
 
-    def __init__(self, organizer, venue, title, description, tags, date, start, end, partnum, status ):
+    def __init__(self, organizer, venue, title, description, tags, date, start, end, status ):
         self.organizer = organizer
         self.title = title
         self.description = description
@@ -128,9 +132,25 @@ class Events(db.Model):
         self.date = date
         self.start = start
         self.end = end
-        self.partnum = partnum
         self.status = status
 
+    def participant_count(self):
+        return Participant.query.filter_by(event=self.id).count
 
+class Participant(db.Model):
+    __tablename__ = "participants"
+    id = db.Column('participant_id', db.Integer , primary_key=True)
+    event = db.Column('event_id', db.Integer, nullable=False)
+    fname = db.Column('fname', db.String())
+    lname = db.Column('lname', db.String())
+    email = db.Column('email', db.String())
+    contact = db.Column('contact', db.String())
 
+    def __init__(self, event, fname, lname, email, contact):
+        self.id = id
+        self.event = event
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.contact = contact
 

@@ -44,10 +44,10 @@ def register():
         print form.username.data
         #if username/email is already used
         if Acc.query.filter_by(username=form.username.data).first():
-            flash('Username already exists. Try a different username.')
+            flash('Username already exists. Try a different username.', 'danger')
             return redirect(url_for('register'))
         if Acc.query.filter_by(email=form.email.data).first():
-            flash('Email already used. Use a different email address.')
+            flash('Email already used. Use a different email address.', 'danger')
             return redirect(url_for('register'))
         #if user,email does not exist yet, and passwords match, register.
         newacc = Acc(username=form.username.data, password=form.password.data, email=form.email.data)
@@ -57,7 +57,7 @@ def register():
         user = User(Acc.get_id(newacc),form.fname.data, form.lname.data, '')
         db.session.add(user)
         db.session.commit()
-        flash('Account created for Acc.username!')
+        flash('Account created for {name}!'.format(name=form.username.data), 'success')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 

@@ -5,6 +5,17 @@
     
     /*==================================================================
     [ Validate ]*/
+    $('#confirm_password').keyup(function(){
+    var pass    =   $('#password').val();
+    var cpass   =   $('#confirm_password').val();
+            if(pass!=cpass){
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            }
+            else{
+                confirm_password.setCustomValidity('');
+            }
+        });
+    
     var input = $('.validate-input .input100');
 
     $('.validate-form').on('submit',function(){
